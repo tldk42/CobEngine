@@ -1,5 +1,5 @@
 #pragma once
-#include "CommonInclude.h"
+#include "CobObject.h"
 
 namespace Cob
 {
@@ -20,8 +20,6 @@ namespace Cob
 		HWND mHwnd;
 		HDC mHdc;
 
-		float mSpeed;
-		float mX;
-		float mY;
+		Object mPlayer;
 	};
 }
