@@ -1,4 +1,5 @@
 #include "CobApplication.h"
+#include "CobInput.h"
 
 namespace Cob
 {
@@ -20,6 +21,8 @@ namespace Cob
 		{
 			mHdc = GetDC(mHwnd);
 			mPlayer.SetPosition(0, 0);
+
+			Input::Initialize();
 		}
 	}
 
@@ -33,6 +36,8 @@ namespace Cob
 
 	void Application::Update()
 	{
+		Input::Update();
+
 		mPlayer.Update();
 	}
 
