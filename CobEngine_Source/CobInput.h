@@ -39,6 +39,10 @@ namespace Cob
 		B,
 		N,
 		M,
+		Left,
+		Right,
+		Down,
+		Up,
 		End
 	};
 
@@ -69,6 +73,14 @@ namespace Cob
 		{
 			return mKeys[static_cast<UINT>(Key)].state == EKeyState::Pressed;
 		}
+
+	private:
+		static void CreateKeys();
+		static void UpdateKeys();
+		static void UpdateKey(Key& InKey);
+		static bool IsKeyDown(EKeyCode InKey);
+		static void UpdateKeyDown(Key& InKey);
+		static void UpdateKeyUp(Key& InKey);
 
 	private:
 		static std::vector<Key> mKeys;
