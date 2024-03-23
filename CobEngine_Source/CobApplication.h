@@ -9,7 +9,7 @@ namespace Cob
 		Application();
 		~Application();
 
-		void Initialize(HWND hwnd);
+		void Initialize(HWND Hwnd, UINT Width, UINT Height);
 		void Run();
 
 		void Update();
@@ -19,6 +19,12 @@ namespace Cob
 	private:
 		HWND mHwnd;
 		HDC mHdc;
+
+		HDC mBackHdc;
+		HBITMAP mBackBitmap;
+
+		UINT mWidth;
+		UINT mHeight;
 
 		Object mPlayer;
 	};

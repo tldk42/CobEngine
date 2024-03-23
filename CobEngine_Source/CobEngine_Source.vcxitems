@@ -17,11 +17,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CobApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CobApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobTime.cpp" />
   </ItemGroup>
 </Project>

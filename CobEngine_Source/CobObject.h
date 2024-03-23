@@ -11,7 +11,7 @@ namespace Cob
 
 		void Update();
 		void LastUpdate();
-		void Render(HDC hdc);
+		void Render(HDC Hdc);
 
 #pragma region Getter
 		FORCEINLINE float GetPositionX() const

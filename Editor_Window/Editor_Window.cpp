@@ -1,7 +1,4 @@
-﻿// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-//
-
-#include "framework.h"
+﻿#include "framework.h"
 #include "Editor_Window.h"
 #include "..//CobEngine_Source/CobApplication.h"
 
@@ -9,12 +6,10 @@ Cob::Application app;
 
 enum { MaxLoadString = 100 };
 
-// 전역 변수:
-HINSTANCE hInst; // 현재 인스턴스입니다.
-WCHAR szTitle[MaxLoadString]; // 제목 표시줄 텍스트입니다.
-WCHAR szWindowClass[MaxLoadString]; // 기본 창 클래스 이름입니다.
+HINSTANCE hInst;
+WCHAR szTitle[MaxLoadString];
+WCHAR szWindowClass[MaxLoadString];
 
-// 이 코드 모듈에 포함된 함수의 선언을 전달합니다: 
 ATOM MyRegisterClass(HINSTANCE hInstance);
 BOOL InitInstance(HINSTANCE, int);
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -42,7 +37,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITORWINDOW));
+	const HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITORWINDOW));
 
 	MSG msg;
 
@@ -67,7 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
-	return (int)msg.wParam;
+	return static_cast<int>(msg.wParam);
 }
 
 
@@ -109,11 +104,14 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
+	const UINT width = 1600;
+	const UINT height = 900;
+
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-	                          CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-	app.Initialize(hWnd);
+	                          CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+	app.Initialize(hWnd, width, height);
 
 	if (!hWnd)
 	{
