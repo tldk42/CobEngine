@@ -3,6 +3,7 @@
 
 namespace Cob
 {
+	/** 키의 세부 상태 */
 	enum class EKeyState
 	{
 		None,
@@ -11,6 +12,7 @@ namespace Cob
 		Up
 	};
 
+	/** 키보드로 입력될 수 있는 키 목록 */
 	enum class EKeyCode
 	{
 		Q,
@@ -59,30 +61,35 @@ namespace Cob
 		static void Initialize();
 		static void Update();
 
-		static bool GetKeyDown(EKeyCode Key)
+		FORCEINLINE static bool GetKeyDown(EKeyCode Key)
 		{
-			return mKeys[static_cast<UINT>(Key)].state == EKeyState::Down;
+			return Keys[static_cast<UINT>(Key)].state == EKeyState::Down;
 		}
 
-		static bool GetKeyUp(EKeyCode Key)
+		FORCEINLINE static bool GetKeyUp(EKeyCode Key)
 		{
-			return mKeys[static_cast<UINT>(Key)].state == EKeyState::Up;
+			return Keys[static_cast<UINT>(Key)].state == EKeyState::Up;
 		}
 
-		static bool GetKey(EKeyCode Key)
+		FORCEINLINE static bool GetKey(EKeyCode Key)
 		{
-			return mKeys[static_cast<UINT>(Key)].state == EKeyState::Pressed;
+			return Keys[static_cast<UINT>(Key)].state == EKeyState::Pressed;
 		}
 
 	private:
+		/** 키 배열에 순서대로 모든 키구조체 정보를 채워 넣는다. */
 		static void CreateKeys();
+		/** 모든 키배열에 대해 상태를 업데이트한다. */
 		static void UpdateKeys();
+		/** InKey에 대해 상태를 업데이트한다. */
 		static void UpdateKey(Key& InKey);
+		/** InKey가 눌렸는지 반환 */
 		static bool IsKeyDown(EKeyCode InKey);
+
 		static void UpdateKeyDown(Key& InKey);
 		static void UpdateKeyUp(Key& InKey);
 
 	private:
-		static std::vector<Key> mKeys;
+		static std::vector<Key> Keys;
 	};
 }

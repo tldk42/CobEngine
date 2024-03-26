@@ -2,7 +2,7 @@
 
 namespace Cob
 {
-	std::vector<Key> Input::mKeys = {};
+	std::vector<Key> Input::Keys = {};
 
 	int ASCII[static_cast<UINT>(EKeyCode::End)] =
 	{
@@ -28,13 +28,13 @@ namespace Cob
 		{
 			Key key = {static_cast<EKeyCode>(i), EKeyState::None, false};
 
-			mKeys.push_back(key);
+			Keys.push_back(key);
 		}
 	}
 
 	void Input::UpdateKeys()
 	{
-		std::ranges::for_each(mKeys, [](Key& InKey)
+		std::ranges::for_each(Keys, [](Key& InKey)
 		{
 			UpdateKey(InKey);
 		});

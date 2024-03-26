@@ -1,59 +1,50 @@
 #include "CobObject.h"
 #include "CobInput.h"
-#include "CobTime.h"
 
-Cob::Object::Object()
-	: mX(0.f),
-	  mY(0.f)
+namespace Cob
 {
-}
-
-Cob::Object::~Object()
-{
-}
-
-void Cob::Object::Update()
-{
-	const int speed = 100.f;
-
-	if (Input::GetKey(EKeyCode::A))
+	Object::Object()
 	{
-		mX -= speed * Time::DeltaTime();
 	}
 
-	if (Input::GetKey(EKeyCode::D))
+	Object::~Object()
 	{
-		mX += speed * Time::DeltaTime();
+		for (const Component* comp : mComponents)
+		{
+			delete comp;
+			comp = nullptr;
+		}
 	}
 
-	if (Input::GetKey(EKeyCode::W))
+	void Object::Initialize()
 	{
-		mY -= speed * Time::DeltaTime();
+		for (Component* comp : mComponents)
+		{
+			comp->Initialize();
+		}
 	}
 
-	if (Input::GetKey(EKeyCode::S))
+	void Object::Update()
 	{
-		mY += speed * Time::DeltaTime();
+		for (Component* comp : mComponents)
+		{
+			comp->Update();
+		}
 	}
-}
 
-void Cob::Object::LastUpdate()
-{
-}
+	void Object::LateUpdate()
+	{
+		for (Component* comp : mComponents)
+		{
+			comp->LateUpdate();
+		}
+	}
 
-void Cob::Object::Render(HDC Hdc)
-{
-	HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-
-	HBRUSH oldBrush = (HBRUSH)SelectObject(Hdc, blueBrush);
-
-	HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-	HPEN oldPen = (HPEN)SelectObject(Hdc, redPen);
-	SelectObject(Hdc, oldPen);
-
-	Rectangle(Hdc, 100 + mX, 100 + mY, 200 + mX, 200 + mY);
-
-	SelectObject(Hdc, oldBrush);
-	DeleteObject(blueBrush);
-	DeleteObject(redPen);
+	void Object::Render(HDC Hdc)
+	{
+		for (Component* comp : mComponents)
+		{
+			comp->Render(Hdc);
+		}
+	}
 }

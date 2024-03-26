@@ -1,40 +1,62 @@
 #pragma once
 #include "CommonInclude.h"
+#include "CobComponent.h"
 
 namespace Cob
 {
+	/**
+	 * \brief 엔진의 Base Object (언리얼의 Actor)
+	 */
 	class Object
 	{
 	public:
 		Object();
-		~Object();
+		virtual ~Object();
 
-		void Update();
-		void LastUpdate();
-		void Render(HDC Hdc);
+		virtual void Initialize();
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render(HDC Hdc);
 
-#pragma region Getter
-		FORCEINLINE float GetPositionX() const
+		/**
+		 * \brief 이 오브젝트에 컴포넌트를 추가한다.
+		 * \tparam T 컴포넌트 타입
+		 * \return 추가된 컴포넌트
+		 */
+		template <typename T>
+		T* AddComponent()
 		{
-			return mX;
+			T* comp = new T;
+			comp->SetOwner(this);
+			mComponents.push_back(comp);
+
+			return comp;
 		}
 
-		FORCEINLINE float GetPositionY() const
+		/**
+		 * \brief 가지고 있는 컴포넌트배열에서 조건을 만족하는 가장 첫 컴포넌트를 반환한다.
+		 * \tparam T 컴포넌트 타입
+		 * \return 반환될 컴포넌트
+		 */
+		template <typename T>
+		T* GetComponent()
 		{
-			return mY;
-		}
-#pragma endregion
+			T* component = nullptr;
 
-#pragma region Setter
-		FORCEINLINE void SetPosition(const float x, const float y)
-		{
-			mX = x;
-			mY = y;
+			for (Component* comp : mComponents)
+			{
+				component = static_cast<T*>(comp);
+				if (component)
+				{
+					break;
+				}
+			}
+
+			return component;
 		}
 
 	private:
-		float mX;
-		float mY;
-#pragma endregion
+		/** 이 오브젝트가 소유하고 있는 컴포넌트들 */
+		std::vector<Component*> mComponents;
 	};
 }

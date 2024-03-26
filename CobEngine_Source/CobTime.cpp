@@ -8,6 +8,7 @@ namespace Cob
 	LARGE_INTEGER Time::CurrentFrequency = {};
 	float Time::DeltaTimeValue = 0.f;
 
+	/** 고유 클럭과 최초 클럭을 로드 */
 	void Time::Initialize()
 	{
 		QueryPerformanceFrequency(&CpuFrequency);
@@ -15,6 +16,7 @@ namespace Cob
 		QueryPerformanceCounter(&PrevFrequency);
 	}
 
+	/** 현재 클럭 - 이전 클럭으로 DeltaTime을 업데이트 */
 	void Time::Update()
 	{
 		QueryPerformanceCounter(&CurrentFrequency);
@@ -26,10 +28,10 @@ namespace Cob
 		PrevFrequency.QuadPart = CurrentFrequency.QuadPart;
 	}
 
+	/** 화면 좌상단(0, 0)에 현재 fps를 표시 */
 	void Time::Render(HDC Hdc)
 	{
 		static float time = 0.f;
-
 
 		time += DeltaTimeValue;
 		const float fps = 1.f / DeltaTimeValue;

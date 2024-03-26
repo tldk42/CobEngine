@@ -1,6 +1,8 @@
 ﻿#include "framework.h"
 #include "Editor_Window.h"
+
 #include "..//CobEngine_Source/CobApplication.h"
+#include "../CobEngine_Window/CobLoadScene.h"
 
 Cob::Application app;
 
@@ -22,9 +24,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-
-
-	// TODO: 여기에 코드를 입력합니다.
 
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MaxLoadString);
@@ -120,6 +119,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+
+	Cob::LoadScenes();
 
 	return TRUE;
 }

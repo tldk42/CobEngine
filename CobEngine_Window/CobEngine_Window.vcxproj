@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CobLoadScene.h" />
+    <ClInclude Include="CobPlayer.h" />
+    <ClInclude Include="CobPlayScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CobPlayer.cpp" />
+    <ClCompile Include="CobPlayScene.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

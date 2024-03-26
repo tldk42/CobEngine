@@ -15,15 +15,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CobApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CobApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobTransform.cpp" />
   </ItemGroup>
 </Project>
