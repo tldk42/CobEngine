@@ -1,12 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="CobLoadScene.h" />
-    <ClInclude Include="CobPlayScene.h" />
     <ClInclude Include="CobPlayer.h" />
+    <ClInclude Include="CobPlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CobLoadScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CobLoadResources.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CobPlayScene.cpp" />
     <ClCompile Include="CobPlayer.cpp" />
+    <ClCompile Include="CobPlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{da584650-a2b4-4aa4-9a36-a4fe841c8a04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

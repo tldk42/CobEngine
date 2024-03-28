@@ -5,6 +5,7 @@ namespace Cob
 {
 	Object::Object()
 	{
+		InitializeTransform();
 	}
 
 	Object::~Object()
@@ -46,5 +47,10 @@ namespace Cob
 		{
 			comp->Render(Hdc);
 		}
+	}
+
+	void Object::InitializeTransform()
+	{
+		AddComponent<Transform>();
 	}
 }

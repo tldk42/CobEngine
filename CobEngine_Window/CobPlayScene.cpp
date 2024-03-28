@@ -1,6 +1,8 @@
 #include "CobPlayScene.h"
 
+#include "CobInput.h"
 #include "CobPlayer.h"
+#include "CobSceneManager.h"
 #include "CobTransform.h"
 #include "CobSpriteRenderer.h"
 
@@ -16,55 +18,12 @@ namespace Cob
 
 	void PlayScene::Initialize()
 	{
-		// for (size_t i = 0; i < 100; ++i)
-		// {
-		// 	Object* object = new Object;
-		// 	AddGameObject(object);
-		// }
-		{
-			Player* pl = new Player();
-			Transform* tr
-				= pl->AddComponent<Transform>();
-			tr->SetPosition(800, 450);
+		mBackground = Object::Instantiate<Player>(ELayerType::Background, {100.f, 100.f});
 
-			tr->SetName(L"TR");
+		SpriteRenderer* sr = mBackground->AddComponent<SpriteRenderer>();
+		sr->LoadImage_Implement(L"../Resource/sample.png");
 
-			SpriteRenderer* sr
-				= pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-
-			AddGameObject(pl);
-		}
-
-		{
-			Player* pl = new Player();
-			Transform* tr
-				= pl->AddComponent<Transform>();
-			tr->SetPosition(300, 450);
-
-			tr->SetName(L"TR");
-
-			SpriteRenderer* sr
-				= pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-
-			AddGameObject(pl);
-		}
-
-		{
-			Player* pl = new Player();
-			Transform* tr
-				= pl->AddComponent<Transform>();
-			tr->SetPosition(100, 650);
-
-			tr->SetName(L"TR");
-
-			SpriteRenderer* sr
-				= pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-
-			AddGameObject(pl);
-		}
+		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
@@ -75,10 +34,29 @@ namespace Cob
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (Input::GetKeyDown(EKeyCode::N))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 
 	void PlayScene::Render(HDC Hdc)
 	{
 		Scene::Render(Hdc);
+
+		wchar_t str[50] = L"Play Scene";
+		TextOut(Hdc, 0, 0, str, 10);
+	}
+
+	void PlayScene::OnEnter()
+	{
+		Scene::OnEnter();
+	}
+
+	void PlayScene::OnExit()
+	{
+		Transform* tr = mBackground->GetComponent<Transform>();
+		tr->SetPosition(Vector2(0, 0));
 	}
 }

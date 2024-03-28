@@ -6,6 +6,9 @@
 
 Cob::Application app;
 
+ULONG_PTR gpToken;
+Gdiplus::GdiplusStartupInput gpsi;
+
 enum { MaxLoadString = 100 };
 
 HINSTANCE hInst;
@@ -60,6 +63,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			app.Run();
 		}
 	}
+
+	Gdiplus::GdiplusShutdown(gpToken);
 
 	return static_cast<int>(msg.wParam);
 }
@@ -119,6 +124,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+
+	Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
+
 
 	Cob::LoadScenes();
 

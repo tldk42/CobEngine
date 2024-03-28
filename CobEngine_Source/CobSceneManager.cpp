@@ -23,4 +23,22 @@ namespace Cob
 	{
 		mActiveScene->Render(Hdc);
 	}
+
+	Scene* SceneManager::LoadScene(const std::wstring& Name)
+	{
+		if (mActiveScene)
+		{
+			mActiveScene->OnExit();
+		}
+
+		if (mScene.contains(Name))
+		{
+			mActiveScene = mScene[Name];
+			mActiveScene->OnEnter();
+
+			return mActiveScene;
+		}
+
+		return nullptr;
+	}
 }

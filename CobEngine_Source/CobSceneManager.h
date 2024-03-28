@@ -1,6 +1,4 @@
 #pragma once
-#include <map>
-
 #include "CobScene.h"
 
 namespace Cob
@@ -11,36 +9,28 @@ namespace Cob
 	class SceneManager
 	{
 	public:
+		static void Initialize();
+		static void Update();
+		static void LateUpdate();
+		static void Render(HDC Hdc);
+
 		template <typename T>
 		static Scene* CreateScene(const std::wstring& Name)
 		{
-			T* scene = new T();
+			T* scene = new T;
+			mActiveScene = scene;
+
 			scene->SetName(Name);
 			scene->Initialize();
+
 
 			mScene.insert({Name, scene});
 			return scene;
 		}
 
-		static Scene* LoadScene(const std::wstring& Name)
-		{
-			const std::map<std::wstring, Scene*>::iterator foundScene = mScene.find(Name);
+		static Scene* LoadScene(const std::wstring& Name);
 
-
-			if (foundScene == mScene.end())
-			{
-				return nullptr;
-			}
-
-			mActiveScene = foundScene->second;
-
-			return foundScene->second;
-		}
-
-		static void Initialize();
-		static void Update();
-		static void LateUpdate();
-		static void Render(HDC Hdc);
+		FORCEINLINE static Scene* GetActiveScene() { return mActiveScene; }
 
 	private:
 		static std::map<std::wstring, Scene*> mScene;

@@ -1,6 +1,14 @@
 #pragma once
 #include "CommonInclude.h"
 #include "CobComponent.h"
+#include "CobLayer.h"
+#include "CobSceneManager.h"
+#include "CobTransform.h"
+
+namespace Cob
+{
+	class Scene;
+}
 
 namespace Cob
 {
@@ -27,6 +35,7 @@ namespace Cob
 		T* AddComponent()
 		{
 			T* comp = new T;
+			comp->Initialize();
 			comp->SetOwner(this);
 			mComponents.push_back(comp);
 
@@ -54,6 +63,34 @@ namespace Cob
 
 			return component;
 		}
+
+		template <typename T>
+		static T* Instantiate(const ELayerType Type)
+		{
+			T* object = new T;
+			Scene* activeScene = SceneManager::GetActiveScene();
+			Layer* layer = activeScene->GetLayer(Type);
+			layer->AddObject(object);
+
+			return object;
+		}
+
+		template <typename T>
+		static T* Instantiate(const ELayerType Type, const Vector2& Position)
+		{
+			T* object = new T;
+			Scene* activeScene = SceneManager::GetActiveScene();
+			Layer* layer = activeScene->GetLayer(Type);
+			layer->AddObject(object);
+
+			Transform* tr = object->template GetComponent<Transform>();
+			tr->SetPosition(Position);
+
+			return object;
+		}
+
+	private:
+		void InitializeTransform();
 
 	private:
 		/** 이 오브젝트가 소유하고 있는 컴포넌트들 */

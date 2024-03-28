@@ -12,7 +12,7 @@ namespace Cob
 		FORCEINLINE void SetName(const std::wstring& Name) { mName = Name; }
 		FORCEINLINE const std::wstring& GetName() { return mName; }
 
-	private:
+	protected:
 		/** 개체의 고유 아이디 */
 		std::wstring mName;
 	};

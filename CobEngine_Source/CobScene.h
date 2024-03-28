@@ -3,6 +3,7 @@
 
 namespace Cob
 {
+	class Layer;
 	class Object;
 
 	/**
@@ -19,9 +20,16 @@ namespace Cob
 		virtual void LateUpdate();
 		virtual void Render(HDC Hdc);
 
-		void AddGameObject(Object* GameObject);
+		virtual void OnEnter();
+		virtual void OnExit();
+
+		void AddGameObject(Object* GameObject, const ELayerType Layer);
+		Layer* GetLayer(const ELayerType Type) { return mLayers[static_cast<UINT>(Type)]; }
 
 	private:
-		std::vector<Object*> mGameObjects;
+		void CreateLayers();
+
+	private:
+		std::vector<Layer*> mLayers;
 	};
 }

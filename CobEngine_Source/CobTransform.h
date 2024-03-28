@@ -3,6 +3,9 @@
 
 namespace Cob
 {
+	using namespace Math;
+
+	/** 위치 변환 컴포넌트 (2D) */
 	class Transform : public Component
 	{
 	public:
@@ -15,20 +18,17 @@ namespace Cob
 		void Render(HDC Hdc) override;
 
 #pragma region Setter
-		FORCEINLINE void SetPosition(const float X, const float Y)
+		FORCEINLINE void SetPosition(const Vector2& NewPosition)
 		{
-			mX = X;
-			mY = Y;
+			mPosition = NewPosition;
 		}
 #pragma endregion
 
 #pragma region Getter
-		FORCEINLINE float GetX() const { return mX; }
-		FORCEINLINE float GetY() const { return mY; }
+		FORCEINLINE Vector2 GetPosition() const { return mPosition; }
 #pragma endregion
 
 	private:
-		float mX;
-		float mY;
+		Vector2 mPosition;
 	};
 }

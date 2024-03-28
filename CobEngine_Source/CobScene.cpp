@@ -1,11 +1,14 @@
 #include "CobScene.h"
+
+#include "CobLayer.h"
 #include "CobObject.h"
 
 namespace Cob
 {
 	Scene::Scene()
-		: mGameObjects{}
+		: mLayers{}
 	{
+		CreateLayers();
 	}
 
 	Scene::~Scene()
@@ -14,36 +17,65 @@ namespace Cob
 
 	void Scene::Initialize()
 	{
+		for (Layer* layer : mLayers)
+		{
+			if (layer == nullptr)
+				continue;
+
+			layer->Initialize();
+		}
 	}
 
 	void Scene::Update()
 	{
-		for (Object* gameObject : mGameObjects)
+		for (Layer* layer : mLayers)
 		{
-			gameObject->Update();
+			if (layer == nullptr)
+				continue;
+
+			layer->Update();
 		}
 	}
 
 	void Scene::LateUpdate()
 	{
-		for (Object* gameObject : mGameObjects)
+		for (Layer* layer : mLayers)
 		{
-			gameObject->LateUpdate();
+			if (layer == nullptr)
+				continue;
+
+			layer->LateUpdate();
 		}
 	}
 
 	void Scene::Render(HDC Hdc)
 	{
-		for (Object* gameObject : mGameObjects)
+		for (Layer* layer : mLayers)
 		{
-			gameObject->Render(Hdc);
+			layer->Render(Hdc);
 		}
 	}
 
-	void Scene::AddGameObject(Object* GameObject)
+	void Scene::OnEnter()
 	{
-		mGameObjects.push_back(GameObject);
+	}
+
+	void Scene::OnExit()
+	{
+	}
+
+	void Scene::AddGameObject(Object* GameObject, const ELayerType Layer)
+	{
+		mLayers[(UINT)Layer]->AddObject(GameObject);
+	}
+
+	void Scene::CreateLayers()
+	{
+		mLayers.resize((UINT)ELayerType::Max);
+
+		for (size_t i = 0; i < (UINT)ELayerType::Max; ++i)
+		{
+			mLayers[i] = new Layer;
+		}
 	}
 }
-
-

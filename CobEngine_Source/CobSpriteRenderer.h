@@ -14,6 +14,11 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+		void LoadImage_Implement(const std::wstring& Path);
+
 	private:
+		Gdiplus::Image* mImage;
+		UINT mWidth;
+		UINT mHeight;
 	};
 }
