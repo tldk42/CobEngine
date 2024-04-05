@@ -37,7 +37,8 @@ namespace Cob
 			T* comp = new T;
 			comp->Initialize();
 			comp->SetOwner(this);
-			mComponents.push_back(comp);
+
+			mComponents[static_cast<UINT>(comp->GetType())] = comp;
 
 			return comp;
 		}

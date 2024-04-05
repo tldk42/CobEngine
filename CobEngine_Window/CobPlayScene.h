@@ -18,6 +18,6 @@ namespace Cob
 		void OnExit() override;
 
 	private:
-		class Player* mBackground;
+		class Player* mPlayer;
 	};
 }

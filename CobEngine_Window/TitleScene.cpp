@@ -30,7 +30,6 @@ namespace Cob
 			SpriteRenderer* sr
 				= bg->AddComponent<SpriteRenderer>();
 			sr->SetName(L"SR");
-			sr->LoadImage_Implement(L"../Resource/title.png");
 
 			AddGameObject(bg, ELayerType::Background);
 		}

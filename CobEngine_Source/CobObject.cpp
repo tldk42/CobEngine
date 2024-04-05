@@ -5,6 +5,7 @@ namespace Cob
 {
 	Object::Object()
 	{
+		mComponents.resize(static_cast<UINT>(EComponentType::End));
 		InitializeTransform();
 	}
 
@@ -21,7 +22,10 @@ namespace Cob
 	{
 		for (Component* comp : mComponents)
 		{
-			comp->Initialize();
+			if (comp)
+			{
+				comp->Initialize();
+			}
 		}
 	}
 
@@ -29,7 +33,10 @@ namespace Cob
 	{
 		for (Component* comp : mComponents)
 		{
-			comp->Update();
+			if (comp)
+			{
+				comp->Update();
+			}
 		}
 	}
 
@@ -37,7 +44,10 @@ namespace Cob
 	{
 		for (Component* comp : mComponents)
 		{
-			comp->LateUpdate();
+			if (comp)
+			{
+				comp->LateUpdate();
+			}
 		}
 	}
 
@@ -45,7 +55,10 @@ namespace Cob
 	{
 		for (Component* comp : mComponents)
 		{
-			comp->Render(Hdc);
+			if (comp)
+			{
+				comp->Render(Hdc);
+			}
 		}
 	}
 

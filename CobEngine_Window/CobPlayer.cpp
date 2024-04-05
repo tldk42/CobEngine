@@ -17,14 +17,6 @@ void Cob::Player::Update()
 void Cob::Player::LateUpdate()
 {
 	Object::LateUpdate();
-
-	if (Input::GetKey(EKeyCode::Right))
-	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-		pos.x += 100.f * Time::DeltaTime();
-		tr->SetPosition(pos);
-	}
 }
 
 void Cob::Player::Render(HDC Hdc)

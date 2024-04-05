@@ -15,6 +15,25 @@ namespace Cob
 		Texture,
 		AudioClip,
 		Prefab,
+		End,
+		Animation
+	};
+
+	enum class ETextureType
+	{
+		None,
+		Bmp,
+		Png,
+		Jpg
+	};
+
+	enum class EComponentType
+	{
+		Transform,
+		SpriteRenderer,
+		Script,
+		Camera,
+		Animator,
 		End
 	};
 }

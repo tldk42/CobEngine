@@ -1,29 +1,33 @@
 #include "CobTransform.h"
 
-Cob::Transform::Transform()
+namespace Cob
 {
-}
+	Transform::Transform()
+		: Component(EComponentType::Transform)
+	{
+	}
 
-Cob::Transform::~Transform()
-{
-}
+	Transform::~Transform()
+	{
+	}
 
-void Cob::Transform::Initialize()
-{
-	Component::Initialize();
-}
+	void Transform::Initialize()
+	{
+		Component::Initialize();
+	}
 
-void Cob::Transform::Update()
-{
-	Component::Update();
-}
+	void Transform::Update()
+	{
+		Component::Update();
+	}
 
-void Cob::Transform::LateUpdate()
-{
-	Component::LateUpdate();
-}
+	void Transform::LateUpdate()
+	{
+		Component::LateUpdate();
+	}
 
-void Cob::Transform::Render(HDC Hdc)
-{
-	Component::Render(Hdc);
+	void Transform::Render(HDC Hdc)
+	{
+		Component::Render(Hdc);
+	}
 }

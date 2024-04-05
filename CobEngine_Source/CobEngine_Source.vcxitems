@@ -14,7 +14,10 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobEnums.h" />
@@ -22,9 +25,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CobLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobTime.h" />
@@ -32,16 +38,22 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTime.cpp" />

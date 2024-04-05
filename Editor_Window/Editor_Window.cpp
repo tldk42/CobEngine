@@ -2,9 +2,10 @@
 #include "Editor_Window.h"
 
 #include "..//CobEngine_Source/CobApplication.h"
+#include "../CobEngine_Window/CobLoadResources.h"
 #include "../CobEngine_Window/CobLoadScene.h"
 
-Cob::Application app;
+Cob::Application application;
 
 ULONG_PTR gpToken;
 Gdiplus::GdiplusStartupInput gpsi;
@@ -60,7 +61,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			app.Run();
+			application.Run();
 		}
 	}
 
@@ -108,14 +109,14 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-	const UINT width = 1600;
-	const UINT height = 900;
+	const UINT width = 672;
+	const UINT height = 846;
 
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 	                          CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-	app.Initialize(hWnd, width, height);
+	application.Initialize(hWnd, width, height);
 
 	if (!hWnd)
 	{
@@ -127,7 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
-
+	Cob::LoadResources();
 	Cob::LoadScenes();
 
 	return TRUE;

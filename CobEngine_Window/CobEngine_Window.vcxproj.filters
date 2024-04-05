@@ -12,6 +12,7 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CobLoadResources.h" />
+    <ClInclude Include="CobPlayerScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CobPlayer.cpp" />
@@ -21,6 +22,7 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="CobPlayerScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">

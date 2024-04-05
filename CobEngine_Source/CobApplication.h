@@ -19,6 +19,10 @@ namespace Cob
 		void LateUpdate();
 		void Render();
 
+		FORCEINLINE HDC GetHdc() const { return mHdc; }
+		FORCEINLINE UINT GetWidth() const { return mWidth; }
+		FORCEINLINE UINT GetHeight() const { return mHeight; }
+
 	private:
 		/** 백버퍼로 화면을 Clear */
 		void ClearRenderTarget();

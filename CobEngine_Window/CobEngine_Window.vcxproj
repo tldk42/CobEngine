@@ -22,11 +22,13 @@
     <ClInclude Include="CobLoadResources.h" />
     <ClInclude Include="CobLoadScene.h" />
     <ClInclude Include="CobPlayer.h" />
+    <ClInclude Include="CobPlayerScript.h" />
     <ClInclude Include="CobPlayScene.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CobPlayer.cpp" />
+    <ClCompile Include="CobPlayerScript.cpp" />
     <ClCompile Include="CobPlayScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
@@ -128,6 +130,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>

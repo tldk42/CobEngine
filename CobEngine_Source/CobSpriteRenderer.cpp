@@ -1,11 +1,15 @@
 #include "CobSpriteRenderer.h"
 
 #include "CobObject.h"
+#include "CobRenderer.h"
 #include "CobTransform.h"
 
 namespace Cob
 {
 	SpriteRenderer::SpriteRenderer()
+		: Component(EComponentType::SpriteRenderer),
+		  mTexture(nullptr),
+		  mSize(Vector2::ONE)
 	{
 	}
 
@@ -30,20 +34,32 @@ namespace Cob
 
 	void SpriteRenderer::Render(HDC Hdc)
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		if (tr)
+		if (mTexture)
 		{
-			Vector2 pos = tr->GetPosition();
+			const Transform* transform = GetOwner()->GetComponent<Transform>();
+			Vector2 position = transform->GetPosition();
 
-			Gdiplus::Graphics graphics(Hdc);
-			graphics.DrawImage(mImage, Gdiplus::Rect(pos.x, pos.y, mWidth, mHeight));
+			position = Renderer::mainCamera->CalculatePosition(position);
+
+			switch (mTexture->GetTextureType())
+			{
+			case ETextureType::None:
+			case ETextureType::Jpg:
+				break;
+			case ETextureType::Bmp:
+				TransparentBlt(Hdc,
+				               position.X, position.Y,
+				               mTexture->GetWidth() * mSize.X, mTexture->GetHeight() * mSize.Y,
+				               mTexture->GetHdc(), 0, 0, mTexture->GetWidth(), mTexture->GetHeight(),
+				               RGB(255, 0, 255));
+				break;
+			case ETextureType::Png:
+				Gdiplus::Graphics graphics(Hdc);
+				graphics.DrawImage(mTexture->GetImage(),
+				                   Gdiplus::Rect(position.X, position.Y, mTexture->GetWidth() * mSize.X,
+				                                 mTexture->GetHeight() * mSize.Y));
+				break;
+			}
 		}
-	}
-
-	void SpriteRenderer::LoadImage_Implement(const std::wstring& Path)
-	{
-		mImage = Gdiplus::Image::FromFile(Path.c_str());
-		mWidth = mImage->GetWidth();
-		mHeight = mImage->GetHeight();
 	}
 }

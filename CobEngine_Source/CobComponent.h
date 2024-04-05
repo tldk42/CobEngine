@@ -12,6 +12,7 @@ namespace Cob
 	{
 	public:
 		Component();
+		Component(EComponentType ComponentType);
 		~Component();
 
 		virtual void Initialize();
@@ -19,11 +20,14 @@ namespace Cob
 		virtual void LateUpdate();
 		virtual void Render(HDC Hdc);
 
-		[[noreturn]] void SetOwner(Object* Owner) { mOwner = Owner; }
-		[[nodiscard]] Object* GetOwner() const { return mOwner; }
+		FORCEINLINE void SetOwner(Object* Owner) { mOwner = Owner; }
+		FORCEINLINE Object* GetOwner() const { return mOwner; }
+		FORCEINLINE EComponentType GetType() const { return mComponentType; }
 
 	private:
 		/** 컴포넌트의 소유 오브젝트 */
 		Object* mOwner;
+
+		EComponentType mComponentType;
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "CobComponent.h"
+#include "CobTexture.h"
 
 namespace Cob
 {
@@ -14,11 +15,13 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
-		void LoadImage_Implement(const std::wstring& Path);
+#pragma region Setter
+		FORCEINLINE void SetTexture(Texture* InTexture) { mTexture = InTexture; }
+		FORCEINLINE void SetSize(const Math::Vector2 InSize) { mSize = InSize; }
+#pragma endregion
 
 	private:
-		Gdiplus::Image* mImage;
-		UINT mWidth;
-		UINT mHeight;
+		Texture* mTexture;
+		Math::Vector2 mSize;
 	};
 }

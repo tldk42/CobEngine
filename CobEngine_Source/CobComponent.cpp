@@ -6,6 +6,11 @@ namespace Cob
 	{
 	}
 
+	Component::Component(EComponentType ComponentType)
+		: mComponentType(ComponentType)
+	{
+	}
+
 	Component::~Component()
 	{
 	}
