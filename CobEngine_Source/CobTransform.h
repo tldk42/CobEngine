@@ -22,13 +22,27 @@ namespace Cob
 		{
 			mPosition = NewPosition;
 		}
+
+		FORCEINLINE void SetScale(const Vector2& NewScale)
+		{
+			mScale = NewScale;
+		}
+
+		FORCEINLINE void SetRotation(const float NewRotation)
+		{
+			mRotation = NewRotation;
+		}
 #pragma endregion
 
 #pragma region Getter
 		FORCEINLINE Vector2 GetPosition() const { return mPosition; }
+		FORCEINLINE Vector2 GetScale() const { return mScale; }
+		FORCEINLINE float GetRotation() const { return mRotation; }
 #pragma endregion
 
 	private:
 		Vector2 mPosition;
+		Vector2 mScale;
+		float mRotation;
 	};
 }

@@ -7,6 +7,7 @@ namespace Cob
 		None,
 		Background,
 		Player,
+		Particle,
 		Max = 16
 	};
 
@@ -35,5 +36,13 @@ namespace Cob
 		Camera,
 		Animator,
 		End
+	};
+
+	enum class EPlayerState
+	{
+		Sleep,
+		SitDown,
+		Walk,
+		Attack
 	};
 }

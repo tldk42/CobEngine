@@ -29,10 +29,13 @@ namespace Cob
 
 	void Animation::Update()
 	{
+		// 완료될 때 까지
 		if (!bComplete)
 		{
+			// 타이머 재생
 			mTime += Time::DeltaTime();
 
+			// 스프라이트 하나의 재생 시간이 다 가기 전이면 계속 실행
 			if (mAnimationSheet[mIndex].Duration < mTime)
 			{
 				mTime = 0.0f;
@@ -63,12 +66,14 @@ namespace Cob
 			}
 
 			BLENDFUNCTION func;
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = AC_SRC_ALPHA;
-			func.SourceConstantAlpha = 255;
+			func.BlendOp = AC_SRC_OVER; // 블렌딩 함수 (SRC_OVER가 디폴트)
+			func.BlendFlags = 0; // 무조건 0
+			func.AlphaFormat = AC_SRC_ALPHA; // 비트맵에 알파채널이 존재함
+			func.SourceConstantAlpha = 255; // 소스 이미지 투명도 (0 ~ 255)
 
+			// 재생 될 애니메이션 스프라이트
 			Sprite animationSprite = mAnimationSheet[mIndex];
+			// 디바이스 컨텍스트
 			HDC imageHDC = mTexture->GetHdc();
 
 			AlphaBlend(Hdc,

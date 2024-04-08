@@ -24,6 +24,19 @@ namespace Cob
 		mActiveScene->Render(Hdc);
 	}
 
+	Scene* SceneManager::CreateScene(const std::wstring& SceneName)
+	{
+		Scene* scene = new Scene;
+		mActiveScene = scene;
+
+		scene->SetName(SceneName);
+		scene->Initialize();
+
+
+		mScene.insert({SceneName, scene});
+		return scene;
+	}
+
 	Scene* SceneManager::LoadScene(const std::wstring& Name)
 	{
 		if (mActiveScene)

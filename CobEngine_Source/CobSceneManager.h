@@ -4,7 +4,7 @@
 namespace Cob
 {
 	/**
-	 * \brief 纠甸阑 包府
+	 * \brief Scene 包府
 	 */
 	class SceneManager
 	{
@@ -15,7 +15,7 @@ namespace Cob
 		static void Render(HDC Hdc);
 
 		template <typename T>
-		static Scene* CreateScene(const std::wstring& Name)
+		static T* CreateScene(const std::wstring& Name)
 		{
 			T* scene = new T;
 			mActiveScene = scene;
@@ -27,6 +27,8 @@ namespace Cob
 			mScene.insert({Name, scene});
 			return scene;
 		}
+
+		static Scene* CreateScene(const std::wstring& SceneName);
 
 		static Scene* LoadScene(const std::wstring& Name);
 

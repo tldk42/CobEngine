@@ -23,11 +23,11 @@ namespace Cob
 
 	void PlayScene::Initialize()
 	{
-		Object* camera = Object::Instantiate<Object>(ELayerType::None, Vector2(344.f, 442.f));
+		Object* camera = Object::Instantiate<Object>(ELayerType::Particle, Vector2(344.f, 442.f));
 		Camera* cameraComponent = camera->AddComponent<Camera>();
 		Renderer::mainCamera = cameraComponent;
 
-		mPlayer = Object::Instantiate<Player>(ELayerType::Player);
+		mPlayer = Object::Instantiate<Player>(ELayerType::Particle);
 		mPlayer->AddComponent<PlayerScript>();
 
 		// SpriteRenderer* spriteRenderer = mPlayer->AddComponent<SpriteRenderer>();
@@ -35,16 +35,32 @@ namespace Cob
 
 		Texture* packManTexture = Resources::Find<Texture>(L"Cat");
 		Animator* packManAnimator = mPlayer->AddComponent<Animator>();
-		packManAnimator->CreateAnimation(L"CatFrontMove", packManTexture, {0.f, 0.f}, {32.f, 32.f}, Vector2::ZERO, 4,
-		                                 .5f);
 
-		packManAnimator->PlayAnimation(L"CatFrontMove", true);
+		packManAnimator->CreateAnimation(L"SitDown", packManTexture
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"DownWalk", packManTexture
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"RightWalk", packManTexture
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"UpWalk", packManTexture
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"LeftWalk", packManTexture
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"SitDown", packManTexture
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+		packManAnimator->CreateAnimation(L"Grooming", packManTexture
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
 
-		Object* background = Object::Instantiate<Object>(ELayerType::Background);
+		packManAnimator->PlayAnimation(L"SitDown", false);
+
+		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 100.0f));
+		mPlayer->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+		Object* background = Object::Instantiate<Object>(ELayerType::Player);
 		SpriteRenderer* backgroundRenderer = background->AddComponent<SpriteRenderer>();
 		backgroundRenderer->SetSize({3.f, 3.f});
 
-		Texture* backgroundTexture = Resources::Find<Texture>(L"Map");
+		Texture* backgroundTexture = Resources::Find<Texture>(L"Bubble");
 		backgroundRenderer->SetTexture(backgroundTexture);
 
 		Scene::Initialize();

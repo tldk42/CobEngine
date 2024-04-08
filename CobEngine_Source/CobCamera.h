@@ -3,6 +3,8 @@
 
 namespace Cob
 {
+	using namespace Math;
+
 	class Camera : public Component
 	{
 	public:
@@ -14,15 +16,15 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
-		FORCEINLINE Math::Vector2 CalculatePosition(const Math::Vector2& Position) const
+		FORCEINLINE Vector2 CalculatePosition(const Vector2& Position) const
 		{
 			return Position - mDistance;
 		}
 
 	private:
 		Object* mViewTarget;
-		Math::Vector2 mDistance;
-		Math::Vector2 mResolution;
-		Math::Vector2 mLookPosition;
+		Vector2 mDistance;
+		Vector2 mResolution;
+		Vector2 mLookPosition;
 	};
 }

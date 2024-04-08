@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CobTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobEntity.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -44,14 +43,24 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CobCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CobScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimation.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimator.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobTransform.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CobTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -100,11 +109,22 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CobSpriteRenderer.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CobCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CobScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimation.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimation.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobTransform.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -133,6 +153,18 @@
     </Filter>
     <Filter Include="Layer">
       <UniqueIdentifier>{c354d34c-5821-4943-bc52-a3923fe46c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{023dc365-81f6-4212-838a-74cf2022aa2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Animation">
+      <UniqueIdentifier>{235700b5-bd6a-44fd-94e4-a3a1ae0e668a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera">
+      <UniqueIdentifier>{7e4f50d2-bb95-41d8-8c61-217d59e4bf34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script">
+      <UniqueIdentifier>{dce09340-8e91-4548-a1e9-ac713b0b6009}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

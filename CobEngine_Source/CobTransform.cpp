@@ -3,7 +3,8 @@
 namespace Cob
 {
 	Transform::Transform()
-		: Component(EComponentType::Transform)
+		: Component(EComponentType::Transform),
+		  mRotation(0)
 	{
 	}
 

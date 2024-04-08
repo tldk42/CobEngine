@@ -15,5 +15,12 @@ namespace Cob
 		void Render(HDC Hdc) override;
 
 	private:
+		void SitDown();
+		void Move();
+
+	private:
+		class Animator* mAnimator;
+
+		EPlayerState mPlayerState;
 	};
 }

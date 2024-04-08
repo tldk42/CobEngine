@@ -3,6 +3,10 @@
 
 namespace Cob
 {
+	/**
+	 * \brief 기본 개체 클래스
+	 * 고유 아이디를 가짐
+	 */
 	class Entity
 	{
 	public:

@@ -5,12 +5,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="EntryPoint">
+      <UniqueIdentifier>{fbd5dc84-2514-4088-bd59-52d6a6a1d30b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Editor_Window.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Editor_Window.h">
+      <Filter>EntryPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Editor_Window.rc">
@@ -26,6 +31,8 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Editor_Window.cpp" />
+    <ClCompile Include="Editor_Window.cpp">
+      <Filter>EntryPoint</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
