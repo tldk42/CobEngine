@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CobCat.h" />
+    <ClInclude Include="CobCatScript.h" />
     <ClInclude Include="CobLoadResources.h" />
     <ClInclude Include="CobLoadScene.h" />
     <ClInclude Include="CobPlayer.h" />
@@ -27,6 +29,8 @@
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CobCat.cpp" />
+    <ClCompile Include="CobCatScript.cpp" />
     <ClCompile Include="CobPlayer.cpp" />
     <ClCompile Include="CobPlayerScript.cpp" />
     <ClCompile Include="CobPlayScene.cpp" />
@@ -56,7 +60,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

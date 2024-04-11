@@ -8,6 +8,7 @@ namespace Cob
 		Background,
 		Player,
 		Particle,
+		Animal,
 		Max = 16
 	};
 

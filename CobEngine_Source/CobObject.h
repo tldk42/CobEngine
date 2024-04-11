@@ -55,7 +55,7 @@ namespace Cob
 
 			for (Component* comp : mComponents)
 			{
-				component = static_cast<T*>(comp);
+				component = dynamic_cast<T*>(comp);
 				if (component)
 				{
 					break;
@@ -65,6 +65,12 @@ namespace Cob
 			return component;
 		}
 
+		/**
+		 * \brief 특정 레이어에 오브젝트를 추가
+		 * \tparam T 오브젝트 파생 클래스
+		 * \param Type 레이어 타입
+		 * \return 추가 된 오브젝트
+		 */
 		template <typename T>
 		static T* Instantiate(const ELayerType Type)
 		{

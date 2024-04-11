@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="CobPlayer.h" />
     <ClInclude Include="CobPlayScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -12,21 +11,48 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CobLoadResources.h" />
-    <ClInclude Include="CobPlayerScript.h" />
+    <ClInclude Include="CobPlayer.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CobCat.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CobPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CobCatScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CobPlayer.cpp" />
     <ClCompile Include="CobPlayScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CobPlayerScript.cpp" />
+    <ClCompile Include="CobPlayer.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CobCat.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CobPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CobCatScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
       <UniqueIdentifier>{da584650-a2b4-4aa4-9a36-a4fe841c8a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{d0b3a4e2-d7da-40f2-982c-652dfb5e526c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{febb8e6a-ea0f-4304-98a6-f182e0016aa9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
