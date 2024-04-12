@@ -45,14 +45,17 @@ namespace Cob
 		Right,
 		Down,
 		Up,
+		LButton,
+		MButton,
+		RButton,
 		End
 	};
 
 	struct Key
 	{
-		EKeyCode keyCode;
-		EKeyState state;
-		bool bPressed;
+		EKeyCode  KeyCode;
+		EKeyState State;
+		bool      bPressed;
 	};
 
 	class Input
@@ -61,22 +64,30 @@ namespace Cob
 		static void Initialize();
 		static void Update();
 
+#pragma region Getter
 		FORCEINLINE static bool GetKeyDown(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Down;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Down;
 		}
 
 		FORCEINLINE static bool GetKeyUp(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Up;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Up;
 		}
 
 		FORCEINLINE static bool GetKey(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Pressed;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Pressed;
 		}
 
+		FORCEINLINE static Math::Vector2 GetMousePosition()
+		{
+			return MousePosition;
+		}
+#pragma endregion
+
 	private:
+#pragma region Input State
 		/** 키 배열에 순서대로 모든 키구조체 정보를 채워 넣는다. */
 		static void CreateKeys();
 		/** 모든 키배열에 대해 상태를 업데이트한다. */
@@ -89,7 +100,12 @@ namespace Cob
 		static void UpdateKeyDown(Key& InKey);
 		static void UpdateKeyUp(Key& InKey);
 
+		static void GetMousePositionWindow();
+		static void ClearKeys();
+#pragma endregion
+
 	private:
 		static std::vector<Key> Keys;
+		static Math::Vector2    MousePosition;
 	};
 }

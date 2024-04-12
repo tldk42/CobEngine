@@ -2,8 +2,8 @@
 
 namespace Cob
 {
-	std::map<std::wstring, Scene*> SceneManager::mScene = {};
-	Scene* SceneManager::mActiveScene = nullptr;
+	std::map<std::wstring, Scene*> SceneManager::mScene       = {};
+	Scene*                         SceneManager::mActiveScene = nullptr;
 
 	void SceneManager::Initialize()
 	{
@@ -22,6 +22,15 @@ namespace Cob
 	void SceneManager::Render(HDC Hdc)
 	{
 		mActiveScene->Render(Hdc);
+	}
+
+	void SceneManager::Release()
+	{
+		for (auto& scene : mScene)
+		{
+			delete scene.second;
+			scene.second = nullptr;
+		}
 	}
 
 	Scene* SceneManager::CreateScene(const std::wstring& SceneName)

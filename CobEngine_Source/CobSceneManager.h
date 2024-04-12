@@ -13,6 +13,7 @@ namespace Cob
 		static void Update();
 		static void LateUpdate();
 		static void Render(HDC Hdc);
+		static void Release();
 
 		template <typename T>
 		static T* CreateScene(const std::wstring& Name)

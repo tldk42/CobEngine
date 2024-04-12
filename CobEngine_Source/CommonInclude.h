@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <functional>
 #include <mmsystem.h>
 #include <dinput.h>
 #include <iostream>

@@ -14,6 +14,8 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+		void AttackEffect();
+
 	private:
 		void SitDown();
 		void Move();

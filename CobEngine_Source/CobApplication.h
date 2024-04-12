@@ -18,10 +18,14 @@ namespace Cob
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Release();
 
-		FORCEINLINE HDC GetHdc() const { return mHdc; }
+#pragma region Getter
+		FORCEINLINE HWND GetHwnd() const { return mHwnd; }
+		FORCEINLINE HDC  GetHdc() const { return mHdc; }
 		FORCEINLINE UINT GetWidth() const { return mWidth; }
 		FORCEINLINE UINT GetHeight() const { return mHeight; }
+#pragma endregion
 
 	private:
 		/** 백버퍼로 화면을 Clear */

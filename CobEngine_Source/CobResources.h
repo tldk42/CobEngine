@@ -37,6 +37,15 @@ namespace Cob
 			return resource;
 		}
 
+		static void Release()
+		{
+			for (auto& resource : mResources)
+			{
+				delete resource.second;
+				resource.second = nullptr;
+			}
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> mResources;
 	};

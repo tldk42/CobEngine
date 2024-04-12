@@ -1,5 +1,6 @@
 #include "CobApplication.h"
 #include "CobInput.h"
+#include "CobResources.h"
 #include "CobSceneManager.h"
 #include "CobTime.h"
 
@@ -59,6 +60,12 @@ namespace Cob
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
 	}
 
+	void Application::Release()
+	{
+		SceneManager::Release();
+		Resources::Release();
+	}
+
 	void Application::ClearRenderTarget()
 	{
 		Rectangle(mBackHdc, -1, -1, 1601, 901);
@@ -82,7 +89,7 @@ namespace Cob
 			RECT rect = {0, 0, Width, Height};
 			AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-			mWidth = rect.right - rect.left;
+			mWidth  = rect.right - rect.left;
 			mHeight = rect.bottom - rect.top;
 
 			SetWindowPos(mHwnd, nullptr, 0, 0, mWidth, mHeight, 0);
@@ -94,7 +101,7 @@ namespace Cob
 	{
 		// 현재 DeviceContext와 호환되는 Bitmap을 얻고 생성한다.
 		mBackBitmap = CreateCompatibleBitmap(mHdc, Width, Height);
-		mBackHdc = CreateCompatibleDC(mHdc);
+		mBackHdc    = CreateCompatibleDC(mHdc);
 
 		// 방금 생성한 백버퍼DC에 백버퍼비트맵을 연결 
 		HBITMAP oldBitmap = static_cast<HBITMAP>(SelectObject(mBackHdc, mBackBitmap));

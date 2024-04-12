@@ -2,63 +2,74 @@
 
 #include "CobObject.h"
 
-Cob::Layer::Layer()
-	: mObjects{}
+namespace Cob
 {
-}
-
-Cob::Layer::~Layer()
-{
-}
-
-void Cob::Layer::Initialize()
-{
-	for (Object* object : mObjects)
+	Layer::Layer()
+		: mObjects{}
 	{
-		if (object)
+	}
+
+	Layer::~Layer()
+	{
+		for (Object* object : mObjects)
 		{
-			object->Initialize();
+			if (object)
+			{
+				delete object;
+				object = nullptr;
+			}
 		}
 	}
-}
 
-void Cob::Layer::Update()
-{
-	for (Object* gameObj : mObjects)
+	void Layer::Initialize()
 	{
-		if (gameObj == nullptr)
-			continue;
-
-		gameObj->Update();
+		for (Object* object : mObjects)
+		{
+			if (object)
+			{
+				object->Initialize();
+			}
+		}
 	}
-}
 
-void Cob::Layer::LateUpdate()
-{
-	for (Object* gameObj : mObjects)
+	void Layer::Update()
 	{
-		if (gameObj == nullptr)
-			continue;
+		for (Object* gameObj : mObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
 
-		gameObj->LateUpdate();
+			gameObj->Update();
+		}
 	}
-}
 
-void Cob::Layer::Render(HDC Hdc)
-{
-	for (Object* gameObj : mObjects)
+	void Layer::LateUpdate()
 	{
-		if (gameObj == nullptr)
-			continue;
+		for (Object* gameObj : mObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
 
-		gameObj->Render(Hdc);
+			gameObj->LateUpdate();
+		}
 	}
-}
 
-void Cob::Layer::AddObject(Object* Object)
-{
-	if (Object)
+	void Layer::Render(HDC Hdc)
 	{
-		mObjects.push_back(Object);
+		for (Object* gameObj : mObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			gameObj->Render(Hdc);
+		}
+	}
+
+	void Layer::AddObject(Object* Object)
+	{
+		if (Object)
+		{
+			mObjects.push_back(Object);
+		}
 	}
 }
