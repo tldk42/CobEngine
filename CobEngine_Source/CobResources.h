@@ -1,11 +1,20 @@
 #pragma once
 #include "CobResource.h"
+#include "CobTexture.h"
 
 namespace Cob
 {
 	class Resources
 	{
 	public:
+		static void Insert(const std::wstring& Key, Texture* Resource)
+		{
+			if (Key.size() > 0 && Resource)
+			{
+				mResources.insert({Key, Resource});
+			}
+		}
+
 		template <typename T>
 		static T* Find(const std::wstring& Key)
 		{
@@ -35,6 +44,15 @@ namespace Cob
 			}
 
 			return resource;
+		}
+
+		static void Release()
+		{
+			for (auto& iter : mResources)
+			{
+				delete iter.second;
+				iter.second = nullptr;
+			}
 		}
 
 	private:

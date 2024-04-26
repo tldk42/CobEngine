@@ -13,6 +13,11 @@ namespace Cob
 
 	Scene::~Scene()
 	{
+		for (Layer* layer : mLayers)
+		{
+			delete layer;
+			layer = nullptr;
+		}
 	}
 
 	void Scene::Initialize()
@@ -53,6 +58,17 @@ namespace Cob
 		for (Layer* layer : mLayers)
 		{
 			layer->Render(Hdc);
+		}
+	}
+
+	void Scene::Destroy()
+	{
+		for (Layer* layer : mLayers)
+		{
+			if (layer)
+			{
+				layer->Destroy();
+			}
 		}
 	}
 

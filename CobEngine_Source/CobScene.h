@@ -19,11 +19,13 @@ namespace Cob
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render(HDC Hdc);
+		virtual void Destroy();
+
 
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(Object* GameObject, const ELayerType Layer);
+		void   AddGameObject(Object* GameObject, const ELayerType Layer);
 		Layer* GetLayer(const ELayerType Type) { return mLayers[static_cast<UINT>(Type)]; }
 
 	private:

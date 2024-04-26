@@ -58,22 +58,22 @@ namespace Cob
 		if (Input::GetKey(EKeyCode::D))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"RightWalk", true);
+			// mAnimator->PlayAnimation(L"RightWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::A))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"LeftWalk", true);
+			// mAnimator->PlayAnimation(L"LeftWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::W))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"UpWalk", true);
+			// mAnimator->PlayAnimation(L"UpWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::S))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"DownWalk", true);
+			// mAnimator->PlayAnimation(L"DownWalk", true);
 		}
 	}
 
@@ -106,8 +106,8 @@ namespace Cob
 			|| Input::GetKeyUp(EKeyCode::W)
 			|| Input::GetKeyUp(EKeyCode::S))
 		{
-			mPlayerState = EPlayerState::SitDown;
-			mAnimator->PlayAnimation(L"SitDown", false);
+			// mPlayerState = EPlayerState::SitDown;
+			// mAnimator->PlayAnimation(L"SitDown", false);
 		}
 	}
 }

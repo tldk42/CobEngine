@@ -18,8 +18,10 @@ namespace Cob
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Release();
 
-		FORCEINLINE HDC GetHdc() const { return mHdc; }
+		FORCEINLINE HWND GetHwnd() const { return mHwnd; }
+		FORCEINLINE HDC  GetHdc() const { return mHdc; }
 		FORCEINLINE UINT GetWidth() const { return mWidth; }
 		FORCEINLINE UINT GetHeight() const { return mHeight; }
 

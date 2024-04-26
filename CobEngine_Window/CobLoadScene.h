@@ -8,9 +8,9 @@ namespace Cob
 {
 	inline void LoadScenes()
 	{
-		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<PlayScene>(L"PackMan Game");
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 
-		SceneManager::LoadScene(L"PlayScene");
+		SceneManager::LoadScene(L"PackMan Game");
 	}
 }

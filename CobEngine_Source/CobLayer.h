@@ -8,6 +8,8 @@ namespace Cob
 
 namespace Cob
 {
+	using ObjectIter = std::vector<Object*>::iterator;
+
 	class Layer : public Entity
 	{
 	public:
@@ -18,6 +20,8 @@ namespace Cob
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render(HDC Hdc);
+		virtual void Destroy();
+
 
 		void AddObject(Object* Object);
 

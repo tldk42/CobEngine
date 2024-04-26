@@ -12,6 +12,14 @@ namespace Cob
 
 namespace Cob
 {
+	enum class EObjectState
+	{
+		Active,
+		Paused,
+		Dead,
+		End
+	};
+
 	/**
 	 * \brief 엔진의 Base Object (언리얼의 Actor)
 	 */
@@ -74,9 +82,9 @@ namespace Cob
 		template <typename T>
 		static T* Instantiate(const ELayerType Type)
 		{
-			T* object = new T;
+			T*     object      = new T;
 			Scene* activeScene = SceneManager::GetActiveScene();
-			Layer* layer = activeScene->GetLayer(Type);
+			Layer* layer       = activeScene->GetLayer(Type);
 			layer->AddObject(object);
 
 			return object;
@@ -85,9 +93,9 @@ namespace Cob
 		template <typename T>
 		static T* Instantiate(const ELayerType Type, const Vector2& Position)
 		{
-			T* object = new T;
+			T*     object      = new T;
 			Scene* activeScene = SceneManager::GetActiveScene();
-			Layer* layer = activeScene->GetLayer(Type);
+			Layer* layer       = activeScene->GetLayer(Type);
 			layer->AddObject(object);
 
 			Transform* tr = object->template GetComponent<Transform>();
@@ -96,11 +104,15 @@ namespace Cob
 			return object;
 		}
 
+		FORCEINLINE EObjectState GetState() const { return mState; }
+		FORCEINLINE void         SetState(const EObjectState NewState) { mState = NewState; }
+
 	private:
 		void InitializeTransform();
 
 	private:
 		/** 이 오브젝트가 소유하고 있는 컴포넌트들 */
 		std::vector<Component*> mComponents;
+		EObjectState            mState;
 	};
 }

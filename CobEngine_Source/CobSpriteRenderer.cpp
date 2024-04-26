@@ -37,9 +37,12 @@ namespace Cob
 		if (mTexture)
 		{
 			const Transform* transform = GetOwner()->GetComponent<Transform>();
-			Vector2 position = transform->GetPosition();
+			Vector2          position  = transform->GetPosition();
 
-			position = Renderer::mainCamera->CalculatePosition(position);
+			if (Renderer::mainCamera)
+			{
+				position = Renderer::mainCamera->CalculatePosition(position);
+			}
 
 			switch (mTexture->GetTextureType())
 			{

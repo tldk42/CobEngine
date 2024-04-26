@@ -13,8 +13,11 @@ namespace Cob
 	{
 		for (const Component* comp : mComponents)
 		{
-			delete comp;
-			comp = nullptr;
+			if (comp)
+			{
+				delete comp;
+				comp = nullptr;
+			}
 		}
 	}
 
