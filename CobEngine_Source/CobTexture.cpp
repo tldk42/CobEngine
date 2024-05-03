@@ -35,6 +35,11 @@ namespace Cob
 		imageTexture->mBitmap = CreateCompatibleBitmap(hdc, InWidth, InHeight);
 		imageTexture->mHdc    = CreateCompatibleDC(hdc);
 
+		HBRUSH transparentBrush = static_cast<HBRUSH>(GetStockObject(NULL_BRUSH));
+		HBRUSH oldBrush         = static_cast<HBRUSH>(SelectObject(hdc, transparentBrush));
+		Rectangle(imageTexture->mHdc, -1, -1, imageTexture->GetWidth() + 1, imageTexture->GetHeight() + 1);
+		SelectObject(hdc, oldBrush);
+
 		HBITMAP oldBitmap = (HBITMAP)SelectObject(imageTexture->mHdc, imageTexture->mBitmap);
 		DeleteObject(oldBitmap);
 

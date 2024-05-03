@@ -53,6 +53,21 @@ namespace Cob
 	{
 	}
 
+	void PlayerScript::OnCollisionEnter( Collider* Other)
+	{
+		// GetOwner()->GetTransform()->SetPosition({200.f, 200.f});
+	}
+
+	void PlayerScript::OnCollisionStay( Collider* Other)
+	{
+		Script::OnCollisionStay(Other);
+	}
+
+	void PlayerScript::OnCollisionExit( Collider* Other)
+	{
+		Script::OnCollisionExit(Other);
+	}
+
 	void PlayerScript::SitDown()
 	{
 		if (Input::GetKey(EKeyCode::D))
@@ -80,7 +95,7 @@ namespace Cob
 	void PlayerScript::Move()
 	{
 		Transform* playerTransform = GetOwner()->GetComponent<Transform>();
-		Vector2 playerPosition = playerTransform->GetPosition();
+		Vector2    playerPosition  = playerTransform->GetPosition();
 
 		if (Input::GetKey(EKeyCode::D))
 		{

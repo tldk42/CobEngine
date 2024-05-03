@@ -32,8 +32,9 @@ namespace Cob
 	enum class EComponentType
 	{
 		Transform,
-		SpriteRenderer,
+		Collider,
 		Script,
+		SpriteRenderer,
 		Camera,
 		Animator,
 		End

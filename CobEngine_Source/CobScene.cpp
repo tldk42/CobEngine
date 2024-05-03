@@ -85,6 +85,11 @@ namespace Cob
 		mLayers[(UINT)Layer]->AddObject(GameObject);
 	}
 
+	void Scene::DeleteObject(Object* Object)
+	{
+		mLayers[static_cast<UINT>(Object->GetLayerType())]->DeleteObject(Object);
+	}
+
 	void Scene::CreateLayers()
 	{
 		mLayers.resize((UINT)ELayerType::Max);

@@ -24,7 +24,7 @@ namespace Cob
 		FORCEINLINE Object* GetOwner() const { return mOwner; }
 		FORCEINLINE EComponentType GetType() const { return mComponentType; }
 
-	private:
+	protected:
 		/** 컴포넌트의 소유 오브젝트 */
 		Object* mOwner;
 

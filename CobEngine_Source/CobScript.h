@@ -14,6 +14,10 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+		virtual void OnCollisionEnter(class Collider* Other);
+		virtual void OnCollisionStay(Collider* Other);
+		virtual void OnCollisionExit(Collider* Other);
+
 	private:
 	};
 }

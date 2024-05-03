@@ -14,10 +14,13 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobCollider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CobCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobEnums.h" />
@@ -36,12 +39,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CobTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CobTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DontDestroyOnLoad.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobCollider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CobCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobInput.cpp" />
@@ -58,5 +65,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CobTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DontDestroyOnLoad.cpp" />
   </ItemGroup>
 </Project>
