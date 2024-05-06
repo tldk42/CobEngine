@@ -26,6 +26,7 @@ namespace Cob
 		virtual void OnExit();
 
 		void   AddGameObject(Object* GameObject, const ELayerType Layer);
+		void   DeleteObject(Object* Object);
 		Layer* GetLayer(const ELayerType Type) { return mLayers[static_cast<UINT>(Type)]; }
 
 	private:

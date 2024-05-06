@@ -30,4 +30,16 @@ namespace Cob
 	{
 		Component::Render(Hdc);
 	}
+
+	void Script::OnCollisionEnter(Collider* Other)
+	{
+	}
+
+	void Script::OnCollisionStay(Collider* Other)
+	{
+	}
+
+	void Script::OnCollisionExit(Collider* Other)
+	{
+	}
 }

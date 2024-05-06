@@ -14,7 +14,10 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+<<<<<<< HEAD
 	private:
 		Math::Vector2 mSize;
+=======
+>>>>>>> 05220025e134bab7820fcdee72603266979b8482
 	};
 }

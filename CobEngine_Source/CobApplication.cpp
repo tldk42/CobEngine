@@ -2,6 +2,7 @@
 #include "CobInput.h"
 #include "CobResources.h"
 #include "CobSceneManager.h"
+#include "CobCollisionManager.h"
 #include "CobTime.h"
 
 namespace Cob
@@ -42,11 +43,15 @@ namespace Cob
 		Input::Update();
 		Time::Update();
 
+		CollisionManager::Update();
+
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
+
 		SceneManager::LateUpdate();
 	}
 
@@ -55,6 +60,9 @@ namespace Cob
 		ClearRenderTarget();
 
 		Time::Render(mBackHdc);
+
+		CollisionManager::Render(mBackHdc);
+
 		SceneManager::Render(mBackHdc);
 
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
@@ -68,7 +76,13 @@ namespace Cob
 
 	void Application::ClearRenderTarget()
 	{
+		HBRUSH grayBrush = CreateSolidBrush(RGB(128, 128, 128));
+		HBRUSH oldBrush  = static_cast<HBRUSH>(SelectObject(GetHdc(), grayBrush));
+
 		Rectangle(mBackHdc, -1, -1, 1601, 901);
+
+		SelectObject(mBackHdc, oldBrush);
+		DeleteObject(grayBrush);
 	}
 
 	void Application::CopyRenderTarget(HDC Source, HDC Dest)
@@ -112,5 +126,7 @@ namespace Cob
 	{
 		Input::Initialize();
 		Time::Initialize();
+
+		CollisionManager::Initialize();
 	}
 }

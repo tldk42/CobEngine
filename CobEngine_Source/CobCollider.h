@@ -14,11 +14,39 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+<<<<<<< HEAD
 		FORCEINLINE Math::Vector2 GetOffset() const { return mOffset; }
 		FORCEINLINE void          SetOffset(const Math::Vector2 InOffset) { mOffset = InOffset; }
 
 	protected:
 		Math::Vector2 mOffset;
 		
+=======
+		void OnCollisionEnter(Collider* Other);
+		void OnCollisionStay(Collider* Other);
+		void OnCollisionExit(Collider* Other);
+
+	public:
+#pragma region Getter & Setter
+		FORCEINLINE Math::Vector2 GetSize() const { return mSize; }
+		FORCEINLINE void          SetSize(const Math::Vector2& InSize) { mSize = InSize; }
+
+		FORCEINLINE Math::Vector2 GetOffset() const { return mOffset; }
+		FORCEINLINE void          SetOffset(const Math::Vector2& InOffset) { mOffset = InOffset; }
+
+		FORCEINLINE UINT32 GetID() const { return mID; }
+		FORCEINLINE void   SetDebugColor(const COLORREF InColor) { mDebugColor = InColor; }
+#pragma endregion
+		void SetInitValue(const Math::Vector2& Offset, const Math::Vector2& Size);
+
+	protected:
+		static UINT CollisionID;
+
+		UINT32        mID;
+		Math::Vector2 mOffset;
+		Math::Vector2 mSize;
+
+		COLORREF mDebugColor;
+>>>>>>> 05220025e134bab7820fcdee72603266979b8482
 	};
 }
