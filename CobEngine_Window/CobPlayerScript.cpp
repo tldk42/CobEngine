@@ -1,8 +1,11 @@
 #include "CobPlayerScript.h"
 
 #include "CobAnimator.h"
+#include "CobCat.h"
+#include "CobCatScript.h"
 #include "CobInput.h"
 #include "CobObject.h"
+#include "CobResources.h"
 #include "CobTime.h"
 #include "CobTransform.h"
 
@@ -66,6 +69,7 @@ namespace Cob
 	void PlayerScript::OnCollisionExit( Collider* Other)
 	{
 		Script::OnCollisionExit(Other);
+
 	}
 
 	void PlayerScript::SitDown()

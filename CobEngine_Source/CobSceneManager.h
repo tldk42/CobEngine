@@ -4,7 +4,7 @@
 namespace Cob
 {
 	/**
-	 * \brief Scene °ü¸®
+	 * \brief Scene Â°Ã¼Â¸Â®
 	 */
 	class SceneManager
 	{
@@ -14,6 +14,7 @@ namespace Cob
 		static void LateUpdate();
 		static void Render(HDC Hdc);
 		static void Destroy();
+
 		static void Release();
 
 		template <typename T>

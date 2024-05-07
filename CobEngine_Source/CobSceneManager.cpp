@@ -8,6 +8,7 @@ namespace Cob
 	Scene*                         SceneManager::mActiveScene       = nullptr;
 	Scene*                         SceneManager::mDontDestroyOnLoad = nullptr;
 
+
 	void SceneManager::Initialize()
 	{
 		mDontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");
@@ -44,6 +45,15 @@ namespace Cob
 		{
 			delete iter.second;
 			iter.second = nullptr;
+		}
+	}
+
+	void SceneManager::Release()
+	{
+		for (auto& scene : mScene)
+		{
+			delete scene.second;
+			scene.second = nullptr;
 		}
 	}
 

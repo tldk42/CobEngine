@@ -52,6 +52,7 @@ namespace Cob
 			{
 				delete iter.second;
 				iter.second = nullptr;
+
 			}
 		}
 

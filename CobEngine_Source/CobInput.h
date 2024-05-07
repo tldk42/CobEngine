@@ -3,7 +3,7 @@
 
 namespace Cob
 {
-	/** Å°ÀÇ ¼¼ºÎ »óÅÂ */
+	/** í‚¤ì˜ ì„¸ë¶€ ìƒíƒœ */
 	enum class EKeyState
 	{
 		None,
@@ -12,7 +12,7 @@ namespace Cob
 		Up
 	};
 
-	/** Å°º¸µå·Î ÀÔ·ÂµÉ ¼ö ÀÖ´Â Å° ¸ñ·Ï */
+	/** í‚¤ë³´ë“œë¡œ ì…ë ¥ë  ìˆ˜ ìˆëŠ” í‚¤ ëª©ë¡ */
 	enum class EKeyCode
 	{
 		Q,
@@ -53,8 +53,8 @@ namespace Cob
 
 	struct Key
 	{
-		EKeyCode  keyCode;
-		EKeyState state;
+		EKeyCode  KeyCode;
+		EKeyState State;
 		bool      bPressed;
 	};
 
@@ -64,19 +64,20 @@ namespace Cob
 		static void Initialize();
 		static void Update();
 
+#pragma region Getter
 		FORCEINLINE static bool GetKeyDown(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Down;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Down;
 		}
 
 		FORCEINLINE static bool GetKeyUp(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Up;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Up;
 		}
 
 		FORCEINLINE static bool GetKey(EKeyCode Key)
 		{
-			return Keys[static_cast<UINT>(Key)].state == EKeyState::Pressed;
+			return Keys[static_cast<UINT>(Key)].State == EKeyState::Pressed;
 		}
 
 		FORCEINLINE static Math::Vector2 GetMousePosition()
@@ -84,21 +85,27 @@ namespace Cob
 			return MousePosition;
 		}
 
+#pragma endregion
+
 	private:
-		/** Å° ¹è¿­¿¡ ¼ø¼­´ë·Î ¸ğµç Å°±¸Á¶Ã¼ Á¤º¸¸¦ Ã¤¿ö ³Ö´Â´Ù. */
+#pragma region Input State
+		/** í‚¤ ë°°ì—´ì— ìˆœì„œëŒ€ë¡œ ëª¨ë“  í‚¤êµ¬ì¡°ì²´ ì •ë³´ë¥¼ ì±„ì›Œ ë„£ëŠ”ë‹¤. */
 		static void CreateKeys();
-		/** ¸ğµç Å°¹è¿­¿¡ ´ëÇØ »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÑ´Ù. */
+		/** ëª¨ë“  í‚¤ë°°ì—´ì— ëŒ€í•´ ìƒíƒœë¥¼ ì—…ë°ì´íŠ¸í•œë‹¤. */
 		static void UpdateKeys();
 		static void ClearKeys();
-		/** InKey¿¡ ´ëÇØ »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÑ´Ù. */
+		/** InKeyì— ëŒ€í•´ ìƒíƒœë¥¼ ì—…ë°ì´íŠ¸í•œë‹¤. */
 		static void UpdateKey(Key& InKey);
-		/** InKey°¡ ´­·È´ÂÁö ¹İÈ¯ */
+		/** InKeyê°€ ëˆŒë ¸ëŠ”ì§€ ë°˜í™˜ */
 		static bool IsKeyDown(EKeyCode InKey);
 
 		static void UpdateKeyDown(Key& InKey);
 		static void UpdateKeyUp(Key& InKey);
 
 		static void GetMousePositionWindow();
+
+		static void ClearKeys();
+
 
 	private:
 		static std::vector<Key> Keys;

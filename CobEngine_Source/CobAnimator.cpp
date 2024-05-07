@@ -23,6 +23,7 @@ namespace Cob
 		{
 			delete iter.second;
 			iter.second = nullptr;
+
 		}
 	}
 
@@ -41,10 +42,11 @@ namespace Cob
 
 			if (mActiveAnimation->IsComplete())
 			{
-				// ÀÌº¥Æ® ¹ÙÀÎµù
+				// ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½Îµï¿½
 				if (events)
 				{
 					events->OnComplete();
+
 				}
 				if (bLoop)
 				{
@@ -80,7 +82,7 @@ namespace Cob
 			newAnimation->SetAnimator(this);
 
 			Events* events = new Events();
-
+      
 			mEvents.insert({Name, events});
 
 			mAnimations.insert({Name, newAnimation});
@@ -117,6 +119,7 @@ namespace Cob
 					nextEvents->OnStart();
 				}
 			}
+
 			mActiveAnimation = animationToPlay;
 			mActiveAnimation->Reset();
 			bLoop = bLoopAnimation;
@@ -145,12 +148,14 @@ namespace Cob
 	{
 		Events* events = FindEvents(Name);
 		return events->OnStart.mEvent;
+
 	}
 
 	std::function<void()>& Animator::GetCompleteEvent(const std::wstring& Name)
 	{
 		Events* events = FindEvents(Name);
 		return events->OnComplete.mEvent;
+
 	}
 
 	std::function<void()>& Animator::GetEndEvent(const std::wstring& Name)

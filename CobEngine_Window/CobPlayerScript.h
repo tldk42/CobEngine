@@ -18,6 +18,7 @@ namespace Cob
 		void OnCollisionStay( Collider* Other) override;
 		void OnCollisionExit( Collider* Other) override;
 
+
 	private:
 		void SitDown();
 		void Move();

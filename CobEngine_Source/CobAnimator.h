@@ -19,6 +19,7 @@ namespace Cob
 			{
 				if (mEvent)
 					mEvent();
+
 			}
 
 			std::function<void()> mEvent;
@@ -29,6 +30,7 @@ namespace Cob
 			Event OnStart;
 			Event OnComplete;
 			Event OnEnd;
+
 		};
 	}
 
@@ -60,6 +62,7 @@ namespace Cob
 		                     , UINT              SpriteLength
 		                     , float             Duration);
 		void             PlayAnimation(const std::wstring& Name, bool bLoopAnimation = false);
+
 		class Animation* FindAnimation(const std::wstring& Name);
 
 		Events*                FindEvents(const std::wstring& Name);
@@ -75,5 +78,6 @@ namespace Cob
 		bool                               bLoop;
 
 		std::map<std::wstring, Events*> mEvents;
+
 	};
 }

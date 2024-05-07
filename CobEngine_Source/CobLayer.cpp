@@ -16,6 +16,7 @@ namespace Cob
 			{
 				delete obj;
 				obj = nullptr;
+
 			}
 		}
 	}
@@ -115,5 +116,6 @@ namespace Cob
 		{
 			return obj->IsDead();
 		});
+
 	}
 }
