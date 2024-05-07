@@ -23,6 +23,9 @@
     <ClInclude Include="CobCatScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="OmokScript.h">
+      <Filter>Scripts\Omok</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CobPlayScene.cpp">
@@ -43,6 +46,9 @@
     <ClCompile Include="CobCatScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="OmokScript.cpp">
+      <Filter>Scripts\Omok</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -53,6 +59,9 @@
     </Filter>
     <Filter Include="Scripts">
       <UniqueIdentifier>{febb8e6a-ea0f-4304-98a6-f182e0016aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Omok">
+      <UniqueIdentifier>{277253af-9e62-42b9-a192-0ce6aed5485d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

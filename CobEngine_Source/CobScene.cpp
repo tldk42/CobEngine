@@ -61,6 +61,17 @@ namespace Cob
 		}
 	}
 
+	void Scene::Destroy()
+	{
+		for (Layer* layer : mLayers)
+		{
+			if (layer)
+			{
+				layer->Destroy();
+			}
+		}
+	}
+
 	void Scene::OnEnter()
 	{
 	}
@@ -72,6 +83,11 @@ namespace Cob
 	void Scene::AddGameObject(Object* GameObject, const ELayerType Layer)
 	{
 		mLayers[(UINT)Layer]->AddObject(GameObject);
+	}
+
+	void Scene::DeleteObject(Object* Object)
+	{
+		mLayers[static_cast<UINT>(Object->GetLayerType())]->DeleteObject(Object);
 	}
 
 	void Scene::CreateLayers()

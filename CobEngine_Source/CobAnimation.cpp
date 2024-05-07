@@ -56,9 +56,9 @@ namespace Cob
 	{
 		if (mTexture)
 		{
-			Object* ownerObject = mAnimator->GetOwner();
+			Object*          ownerObject    = mAnimator->GetOwner();
 			const Transform* ownerTransform = ownerObject->GetComponent<Transform>();
-			Vector2 ownerPosition = ownerTransform->GetPosition();
+			Vector2          ownerPosition  = ownerTransform->GetPosition();
 
 			if (Renderer::mainCamera)
 			{
@@ -66,10 +66,10 @@ namespace Cob
 			}
 
 			BLENDFUNCTION func;
-			func.BlendOp = AC_SRC_OVER; // 블렌딩 함수 (SRC_OVER가 디폴트)
-			func.BlendFlags = 0; // 무조건 0
-			func.AlphaFormat = AC_SRC_ALPHA; // 비트맵에 알파채널이 존재함
-			func.SourceConstantAlpha = 255; // 소스 이미지 투명도 (0 ~ 255)
+			func.BlendOp             = AC_SRC_OVER;  // 블렌딩 함수 (SRC_OVER가 디폴트)
+			func.BlendFlags          = 0;            // 무조건 0
+			func.AlphaFormat         = AC_SRC_ALPHA; // 비트맵에 알파채널이 존재함
+			func.SourceConstantAlpha = 255;          // 소스 이미지 투명도 (0 ~ 255)
 
 			// 재생 될 애니메이션 스프라이트
 			Sprite animationSprite = mAnimationSheet[mIndex];
@@ -89,9 +89,9 @@ namespace Cob
 		}
 	}
 
-	void Animation::CreateAnimation(const std::wstring& Name, Texture* SpriteSheet, const Math::Vector2& LeftTop,
+	void Animation::CreateAnimation(const std::wstring&  Name, Texture* SpriteSheet, const Math::Vector2& LeftTop,
 	                                const Math::Vector2& Size, const Math::Vector2& Offset, const UINT SpriteLength,
-	                                const float Duration)
+	                                const float          Duration)
 	{
 		mTexture = SpriteSheet;
 
@@ -100,8 +100,20 @@ namespace Cob
 			Sprite newSprite;
 			newSprite.LeftTop.X = LeftTop.X + (Size.X * i);
 			newSprite.LeftTop.Y = LeftTop.Y;
-			newSprite.Size = Size;
-			newSprite.Offset = Offset;
+			newSprite.Size      = Size;
+			newSprite.Offset    = Offset;
+			newSprite.Duration  = Duration;
+
+			mAnimationSheet.push_back(newSprite);
+		}
+	}
+
+	void Animation::CreateAnimation(const std::wstring& Name, Texture* Sprites[], const UINT SpriteSize,
+	                                const float         Duration)
+	{
+		for (size_t i = 0; i < SpriteSize; ++i)
+		{
+			Sprite newSprite;
 			newSprite.Duration = Duration;
 
 			mAnimationSheet.push_back(newSprite);
@@ -110,8 +122,8 @@ namespace Cob
 
 	void Animation::Reset()
 	{
-		mTime = 0.f;
-		mIndex = 0;
+		mTime     = 0.f;
+		mIndex    = 0;
 		bComplete = false;
 	}
 }

@@ -4,7 +4,7 @@
 namespace Cob
 {
 	/**
-	 * \brief Scene °ü¸®
+	 * \brief Scene Â°Ã¼Â¸Â®
 	 */
 	class SceneManager
 	{
@@ -13,12 +13,14 @@ namespace Cob
 		static void Update();
 		static void LateUpdate();
 		static void Render(HDC Hdc);
+		static void Destroy();
+
 		static void Release();
 
 		template <typename T>
 		static T* CreateScene(const std::wstring& Name)
 		{
-			T* scene = new T;
+			T* scene     = new T;
 			mActiveScene = scene;
 
 			scene->SetName(Name);
@@ -35,8 +37,11 @@ namespace Cob
 
 		FORCEINLINE static Scene* GetActiveScene() { return mActiveScene; }
 
+		FORCEINLINE static Scene* GetDontDestroyOnLoad() { return mDontDestroyOnLoad; }
+
 	private:
 		static std::map<std::wstring, Scene*> mScene;
-		static Scene* mActiveScene;
+		static Scene*                         mActiveScene;
+		static Scene*                         mDontDestroyOnLoad;
 	};
 }

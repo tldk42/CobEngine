@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+
 #include "CobAnimation.h"
 #include "CobComponent.h"
 
@@ -6,22 +8,18 @@ namespace Cob
 {
 	namespace Anim
 	{
-		/** 이벤트 */
 		struct Event
 		{
-			/** 이벤트 등록 */
-			void operator=(const std::function<void()>& Function)
+			void operator=(std::function<void()> func)
 			{
-				mEvent = Function;
+				mEvent = std::move(func);
 			}
 
-			/** 이벤트 실행 */
 			void operator()()
 			{
 				if (mEvent)
-				{
-					mEvent;
-				}
+					mEvent();
+
 			}
 
 			std::function<void()> mEvent;
@@ -29,9 +27,10 @@ namespace Cob
 
 		struct Events
 		{
-			Event StartEvent;
-			Event CompleteEvent;
-			Event EndEvent;
+			Event OnStart;
+			Event OnComplete;
+			Event OnEnd;
+
 		};
 	}
 
@@ -42,6 +41,11 @@ namespace Cob
 	class Animator : public Component
 	{
 	public:
+		struct A
+		{
+			std::function<void()> mEvents;
+		};
+
 		Animator();
 		~Animator();
 
@@ -57,7 +61,7 @@ namespace Cob
 		                     , Math::Vector2     Offset
 		                     , UINT              SpriteLength
 		                     , float             Duration);
-		void PlayAnimation(const std::wstring& Name, bool bLoopAnimation = false);
+		void             PlayAnimation(const std::wstring& Name, bool bLoopAnimation = false);
 
 		class Animation* FindAnimation(const std::wstring& Name);
 
@@ -66,12 +70,14 @@ namespace Cob
 		std::function<void()>& GetCompleteEvent(const std::wstring& Name);
 		std::function<void()>& GetEndEvent(const std::wstring& Name);
 
-		FORCEINLINE bool IsComplete() const { return mActiveAnimation->IsComplete(); }
+		bool IsComplete() const { return mActiveAnimation->IsComplete(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
-		std::map<std::wstring, Events*>    mEvents;
 		Animation*                         mActiveAnimation;
 		bool                               bLoop;
+
+		std::map<std::wstring, Events*> mEvents;
+
 	};
 }

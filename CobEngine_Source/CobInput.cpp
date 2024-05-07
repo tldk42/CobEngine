@@ -6,8 +6,9 @@ extern Cob::Application application;
 namespace Cob
 {
 	std::vector<Key> Input::Keys          = {};
-	Vector2          Input::MousePosition = Vector2::ZERO;
+	Vector2          Input::MousePosition = {};
 
+  
 	int ASCII[static_cast<UINT>(EKeyCode::End)] =
 	{
 		'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -45,11 +46,33 @@ namespace Cob
 		});
 	}
 
+	void Input::ClearKeys()
+	{
+		for (Key& key : Keys)
+		{
+			switch (key.state)
+			{
+			case EKeyState::None:
+				break;
+			case EKeyState::Down:
+			case EKeyState::Pressed:
+				key.state = EKeyState::Up;
+				break;
+			case EKeyState::Up:
+				key.state = EKeyState::None;
+				break;
+			}
+
+			key.bPressed = false;
+		}
+	}
+
 	void Input::UpdateKey(Key& InKey)
 	{
 		if (GetFocus())
 		{
-			IsKeyDown(InKey.KeyCode) ? UpdateKeyDown(InKey) : UpdateKeyUp(InKey);
+			IsKeyDown(InKey.keyCode) ? UpdateKeyDown(InKey) : UpdateKeyUp(InKey);
+
 
 			GetMousePositionWindow();
 		}
@@ -61,7 +84,7 @@ namespace Cob
 
 	bool Input::IsKeyDown(EKeyCode InKey)
 	{
-		// 0x8000 Àº ÇöÀç Å°°¡ ´­·ÁÁø »óÅÂ
+		// 0x8000 ì€ í˜„ì¬ í‚¤ê°€ ëˆŒë ¤ì§„ ìƒíƒœ
 		return GetAsyncKeyState(ASCII[static_cast<UINT>(InKey)]) & 0x8000;
 	}
 
@@ -83,15 +106,16 @@ namespace Cob
 	{
 		POINT mousePos;
 
-		// ¸¶¿ì½º Æ÷ÀÎÅÍÀ§Ä¡ ÀúÀå
+		// ë§ˆìš°ìŠ¤ í¬ì¸í„°ìœ„ì¹˜ ì €ì¥
 		GetCursorPos(&mousePos);
 
-		// ÀúÀåµÈ Æ÷ÀÎÅÍ À§Ä¡¸¦ Å¬¶óÀÌ¾ğÆ® ¿µ¿ª ÁÂÇ¥·Î º¯È¯
+		// ì €ì¥ëœ í¬ì¸í„° ìœ„ì¹˜ë¥¼ í´ë¼ì´ì–¸íŠ¸ ì˜ì—­ ì¢Œí‘œë¡œ ë³€í™˜
 		ScreenToClient(application.GetHwnd(), &mousePos);
 
 		MousePosition.X = mousePos.x;
 		MousePosition.Y = mousePos.y;
 	}
+
 
 	void Input::ClearKeys()
 	{

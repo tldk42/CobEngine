@@ -31,13 +31,18 @@ namespace Cob
 		void Update();
 		void Render(HDC Hdc);
 
-		void CreateAnimation(const std::wstring& Name,
-		                     Texture* SpriteSheet,
+		void CreateAnimation(const std::wstring&  Name,
+		                     Texture*             SpriteSheet,
 		                     const Math::Vector2& LeftTop,
 		                     const Math::Vector2& Size,
 		                     const Math::Vector2& Offset,
-		                     const UINT SpriteLength,
-		                     const float Duration);
+		                     const UINT           SpriteLength,
+		                     const float          Duration);
+
+		void CreateAnimation(const std::wstring& Name,
+		                     Texture*            Sprites[],
+		                     const UINT          SpriteSize,
+		                     const float         Duration);
 
 		/** 타이머, 스프라이트 텍스처 초기화 */
 		void Reset();

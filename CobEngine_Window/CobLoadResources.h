@@ -8,10 +8,9 @@ namespace Cob
 	void LoadResources()
 	{
 		Resources::Load<Texture>(L"Chicken", L"../Resource/img/Chicken.bmp");
-		Resources::Load<Texture>(L"Map", L"..\\Resource\\img\\map\\map_pure.png");
-		Resources::Load<Texture>(L"PackMan", L"..\\Resource\\img\\pacman\\0.png");
-		Resources::Load<Texture>(L"Cat", L"../Resource/img/ChickenAlpha.bmp");
-		Resources::Load<Texture>(L"Bubble", L"../Resource/Bubble.png");
-		Resources::Load<Texture>(L"Maple_VFX", L"../Resource/ezgif.com-gif-maker.png");
+		Resources::Load<Texture>(L"Map", L"../Resource/img/map/map_pure.png");
+		Resources::Load<Texture>(L"PacMan", L"../Resource/img/pacman/1.png");
+		Resources::Load<Texture>(L"Cat", L"../Resource/img/snowball.bmp");
+		Resources::Load<Texture>(L"Ghost", L"../Resource/img/ghost/clyde/d1.png");
 	}
 }

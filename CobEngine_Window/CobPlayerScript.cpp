@@ -56,31 +56,20 @@ namespace Cob
 	{
 	}
 
-	void PlayerScript::AttackEffect()
+	void PlayerScript::OnCollisionEnter( Collider* Other)
 	{
-		Cat* cat = Object::Instantiate<Cat>(ELayerType::Animal);
-		cat->AddComponent<CatScript>();
+		// GetOwner()->GetTransform()->SetPosition({200.f, 200.f});
+	}
 
-		Texture*  catTex      = Resources::Find<Texture>(L"Cat");
-		Animator* catAnimator = cat->AddComponent<Animator>();
-		catAnimator->CreateAnimation(L"DownWalk", catTex
-		                             , Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"RightWalk", catTex
-		                             , Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"UpWalk", catTex
-		                             , Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"LeftWalk", catTex
-		                             , Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"SitDown", catTex
-		                             , Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"Grooming", catTex
-		                             , Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"LayDown", catTex
-		                             , Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
+	void PlayerScript::OnCollisionStay( Collider* Other)
+	{
+		Script::OnCollisionStay(Other);
+	}
 
-		catAnimator->PlayAnimation(L"SitDown", false);
-		cat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
-		cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+	void PlayerScript::OnCollisionExit( Collider* Other)
+	{
+		Script::OnCollisionExit(Other);
+
 	}
 
 	void PlayerScript::SitDown()
@@ -88,22 +77,22 @@ namespace Cob
 		if (Input::GetKey(EKeyCode::D))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"RightWalk", true);
+			// mAnimator->PlayAnimation(L"RightWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::A))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"LeftWalk", true);
+			// mAnimator->PlayAnimation(L"LeftWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::W))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"UpWalk", true);
+			// mAnimator->PlayAnimation(L"UpWalk", true);
 		}
 		if (Input::GetKey(EKeyCode::S))
 		{
 			mPlayerState = EPlayerState::Walk;
-			mAnimator->PlayAnimation(L"DownWalk", true);
+			// mAnimator->PlayAnimation(L"DownWalk", true);
 		}
 	}
 
@@ -136,8 +125,8 @@ namespace Cob
 			|| Input::GetKeyUp(EKeyCode::W)
 			|| Input::GetKeyUp(EKeyCode::S))
 		{
-			mPlayerState = EPlayerState::SitDown;
-			mAnimator->PlayAnimation(L"SitDown", false);
+			// mPlayerState = EPlayerState::SitDown;
+			// mAnimator->PlayAnimation(L"SitDown", false);
 		}
 	}
 }

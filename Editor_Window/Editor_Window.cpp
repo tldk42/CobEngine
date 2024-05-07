@@ -29,6 +29,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE     hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MaxLoadString);
 	LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MaxLoadString);
@@ -66,6 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE     hInstance,
 	}
 
 	Gdiplus::GdiplusShutdown(gpToken);
+	application.Release();
 
 	return static_cast<int>(msg.wParam);
 }
@@ -109,8 +112,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-	const UINT width  = 672;
-	const UINT height = 846;
+	const UINT width  = 224 * 2;
+	const UINT height = 282 * 2;
 
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 

@@ -13,16 +13,17 @@ namespace Cob
 
 	Animator::~Animator()
 	{
-		for (auto& animation : mAnimations)
+		for (auto& iter : mAnimations)
 		{
-			delete animation.second;
-			animation.second = nullptr;
+			delete iter.second;
+			iter.second = nullptr;
 		}
 
-		for (auto& event : mEvents)
+		for (auto& iter : mEvents)
 		{
-			delete event.second;
-			event.second = nullptr;
+			delete iter.second;
+			iter.second = nullptr;
+
 		}
 	}
 
@@ -37,13 +38,15 @@ namespace Cob
 		{
 			mActiveAnimation->Update();
 
-			const Events* events = FindEvents(mActiveAnimation->GetName());
+			Events* events = FindEvents(mActiveAnimation->GetName());
 
 			if (mActiveAnimation->IsComplete())
 			{
+				// �̺�Ʈ ���ε�
 				if (events)
 				{
-					events->CompleteEvent;
+					events->OnComplete();
+
 				}
 				if (bLoop)
 				{
@@ -79,11 +82,24 @@ namespace Cob
 			newAnimation->SetAnimator(this);
 
 			Events* events = new Events();
+      
 			mEvents.insert({Name, events});
 
 			mAnimations.insert({Name, newAnimation});
 		}
 	}
+
+	// void Animator::CreateAnimation(const std::wstring& Name, Texture* Sprites[], const float Duration)
+	// {
+	// 	if (!FindAnimation(Name))
+	// 	{
+	// 		Animation* newAnimation = new Animation;
+	// 		newAnimation->CreateAnimation(Name, Sprites, Duration);
+	//
+	// 		newAnimation->SetAnimator(this);
+	// 		mAnimations.insert({Name, newAnimation});
+	// 	}
+	// }
 
 	void Animator::PlayAnimation(const std::wstring& Name, const bool bLoopAnimation)
 	{
@@ -92,17 +108,16 @@ namespace Cob
 			if (mActiveAnimation)
 			{
 				Events* currentEvents = FindEvents(mActiveAnimation->GetName());
-
 				if (currentEvents)
 				{
-					currentEvents->EndEvent();
+					currentEvents->OnEnd();
 				}
-			}
 
-			Events* nextEvents = FindEvents(animationToPlay->GetName());
-			if (nextEvents)
-			{
-				nextEvents->StartEvent();
+				Events* nextEvents = FindEvents(animationToPlay->GetName());
+				if (nextEvents)
+				{
+					nextEvents->OnStart();
+				}
 			}
 
 			mActiveAnimation = animationToPlay;
@@ -132,18 +147,20 @@ namespace Cob
 	std::function<void()>& Animator::GetStartEvent(const std::wstring& Name)
 	{
 		Events* events = FindEvents(Name);
-		return events->StartEvent.mEvent;
+		return events->OnStart.mEvent;
+
 	}
 
 	std::function<void()>& Animator::GetCompleteEvent(const std::wstring& Name)
 	{
 		Events* events = FindEvents(Name);
-		return events->CompleteEvent.mEvent;
+		return events->OnComplete.mEvent;
+
 	}
 
 	std::function<void()>& Animator::GetEndEvent(const std::wstring& Name)
 	{
 		Events* events = FindEvents(Name);
-		return events->EndEvent.mEvent;
+		return events->OnEnd.mEvent;
 	}
 }

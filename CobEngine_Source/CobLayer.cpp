@@ -1,5 +1,4 @@
 #include "CobLayer.h"
-
 #include "CobObject.h"
 
 namespace Cob
@@ -11,12 +10,13 @@ namespace Cob
 
 	Layer::~Layer()
 	{
-		for (Object* object : mObjects)
+		for (Object* obj : mObjects)
 		{
-			if (object)
+			if (obj)
 			{
-				delete object;
-				object = nullptr;
+				delete obj;
+				obj = nullptr;
+
 			}
 		}
 	}
@@ -36,10 +36,10 @@ namespace Cob
 	{
 		for (Object* gameObj : mObjects)
 		{
-			if (gameObj == nullptr)
-				continue;
-
-			gameObj->Update();
+			if (gameObj && (gameObj->GetState() != EObjectState::Dead || gameObj->GetState() != EObjectState::Paused))
+			{
+				gameObj->Update();
+			}
 		}
 	}
 
@@ -47,10 +47,10 @@ namespace Cob
 	{
 		for (Object* gameObj : mObjects)
 		{
-			if (gameObj == nullptr)
-				continue;
-
-			gameObj->LateUpdate();
+			if (gameObj && (gameObj->GetState() != EObjectState::Dead || gameObj->GetState() != EObjectState::Paused))
+			{
+				gameObj->LateUpdate();
+			}
 		}
 	}
 
@@ -58,11 +58,20 @@ namespace Cob
 	{
 		for (Object* gameObj : mObjects)
 		{
-			if (gameObj == nullptr)
-				continue;
-
-			gameObj->Render(Hdc);
+			if (gameObj && (gameObj->GetState() != EObjectState::Dead || gameObj->GetState() != EObjectState::Paused))
+			{
+				gameObj->Render(Hdc);
+			}
 		}
+	}
+
+	void Layer::Destroy()
+	{
+		std::vector<Object*> deleteObjects = {};
+
+		FindDeadObjects(deleteObjects);
+		DeleteDeadObject();
+		DeleteObjects(deleteObjects);
 	}
 
 	void Layer::AddObject(Object* Object)
@@ -71,5 +80,42 @@ namespace Cob
 		{
 			mObjects.push_back(Object);
 		}
+	}
+
+	void Layer::DeleteObject(Object* ObjectToDelete)
+	{
+		std::erase_if(mObjects, [=](Object* obj)
+		{
+			return ObjectToDelete == obj;
+		});
+	}
+
+	void Layer::FindDeadObjects(std::vector<Object*>& Objects) const
+	{
+		for (Object* object : mObjects)
+		{
+			if (object->IsDead())
+			{
+				Objects.push_back(object);
+			}
+		}
+	}
+
+	void Layer::DeleteObjects(std::vector<Object*> Objects)
+	{
+		for (Object* object : Objects)
+		{
+			delete object;
+			object = nullptr;
+		}
+	}
+
+	void Layer::DeleteDeadObject()
+	{
+		std::erase_if(mObjects, [](Object* obj)
+		{
+			return obj->IsDead();
+		});
+
 	}
 }

@@ -1,17 +1,15 @@
 #include "CobPlayScene.h"
 
 #include "CobAnimator.h"
-#include "CobCamera.h"
-#include "CobCat.h"
-#include "CobCatScript.h"
 #include "CobInput.h"
 #include "CobPlayer.h"
 #include "CobPlayerScript.h"
-#include "CobRenderer.h"
 #include "CobResources.h"
 #include "CobSceneManager.h"
 #include "CobTransform.h"
 #include "CobSpriteRenderer.h"
+#include "CobCollisionManager.h"
+#include "BoxCollider2D.h"
 
 namespace Cob
 {
@@ -25,69 +23,65 @@ namespace Cob
 
 	void PlayScene::Initialize()
 	{
-		Object* camera          = Object::Instantiate<Object>(ELayerType::Particle, Vector2(344.f, 442.f));
-		Camera* cameraComponent = camera->AddComponent<Camera>();
-		Renderer::mainCamera    = cameraComponent;
+		CollisionManager::CollisionLayerCheck(ELayerType::Player, ELayerType::Animal, true);
+		CollisionManager::CollisionLayerCheck(ELayerType::Player, ELayerType::Background, true);
 
-		mPlayer = Object::Instantiate<Player>(ELayerType::Particle);
-		mPlayer->AddComponent<PlayerScript>();
+		Texture* backgroundTexture = Resources::Find<Texture>(L"Map");
+		Texture* pacManTexture     = Resources::Find<Texture>(L"PacMan");
+		Texture* ghostTexture      = Resources::Find<Texture>(L"Ghost");
 
-		// SpriteRenderer* spriteRenderer = mPlayer->AddComponent<SpriteRenderer>();
-		// spriteRenderer->SetSize({3.f, 3.f});
-
-		Texture*  packManTexture  = Resources::Find<Texture>(L"Cat");
-		Animator* packManAnimator = mPlayer->AddComponent<Animator>();
-
-		packManAnimator->CreateAnimation(L"SitDown", packManTexture
-		                                 , Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"DownWalk", packManTexture
-		                                 , Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"RightWalk", packManTexture
-		                                 , Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"UpWalk", packManTexture
-		                                 , Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"LeftWalk", packManTexture
-		                                 , Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"SitDown", packManTexture
-		                                 , Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		packManAnimator->CreateAnimation(L"Grooming", packManTexture
-		                                 , Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-
-		packManAnimator->PlayAnimation(L"SitDown", false);
-
-		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 100.0f));
-		mPlayer->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
-
-		Cat* cat = Object::Instantiate<Cat>(ELayerType::Animal);
-		cat->AddComponent<CatScript>();
-
-		Texture*  catTex      = Resources::Find<Texture>(L"Cat");
-		Animator* catAnimator = cat->AddComponent<Animator>();
-		catAnimator->CreateAnimation(L"DownWalk", catTex
-		                             , Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"RightWalk", catTex
-		                             , Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"UpWalk", catTex
-		                             , Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"LeftWalk", catTex
-		                             , Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"SitDown", catTex
-		                             , Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"Grooming", catTex
-		                             , Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-		catAnimator->CreateAnimation(L"LayDown", catTex
-		                             , Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::ZERO, 4, 0.1f);
-
-		catAnimator->PlayAnimation(L"SitDown", false);
-		cat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
-		cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
-
-		Object*         background         = Object::Instantiate<Object>(ELayerType::Player);
+		Object*         background         = Object::Instantiate<Object>(ELayerType::Background, {0.f, 0.f});
 		SpriteRenderer* backgroundRenderer = background->AddComponent<SpriteRenderer>();
-		backgroundRenderer->SetSize({3.f, 3.f});
 
-		Texture* backgroundTexture = Resources::Find<Texture>(L"Bubble");
-		backgroundRenderer->SetTexture(backgroundTexture);
+
+		backgroundRenderer->SetSize({2.f, 2.f});
+
+		Object* backgroundCollider_Top = Object::Instantiate<Object>(ELayerType::Background, {0, 0});
+		backgroundCollider_Top->AddComponent<BoxCollider2D>()->SetSize({450.f, 5.f});
+		Object* backgroundCollider_Left = Object::Instantiate<Object>(ELayerType::Background, {0, 5.f});
+		backgroundCollider_Left->AddComponent<BoxCollider2D>()->SetSize({5.f, 530.f});
+		Object* backgroundCollider_Bottom = Object::Instantiate<Object>(ELayerType::Background, {0, 540});
+		backgroundCollider_Bottom->AddComponent<BoxCollider2D>()->SetSize({450.f, 5.f});
+		Object* backgroundCollider_Right = Object::Instantiate<Object>(ELayerType::Background, {440, 5.f});
+		backgroundCollider_Right->AddComponent<BoxCollider2D>()->SetSize({5.f, 530.f});
+
+		mPlayer         = Object::Instantiate<Player>(ELayerType::Player, {100.f, 100.f});
+		SpriteRenderer* pacmanRenderer = mPlayer->AddComponent<SpriteRenderer>();
+		// Animator*       pacmanAnimator = pacMan->AddComponent<Animator>();
+		Object::DontDestroyOnLoad(mPlayer);
+
+		PlayerScript* pacManScript = mPlayer->AddComponent<PlayerScript>();
+
+		if (BoxCollider2D* pacManBoxCollider = mPlayer->AddComponent<BoxCollider2D>())
+		{
+			pacManBoxCollider->SetInitValue({-3.f, -3.f}, {20.f, 20.f});
+		}
+
+		Object*         ghost1         = Object::Instantiate<Object>(ELayerType::Animal, {150, 150.f});
+		SpriteRenderer* ghost1Renderer = ghost1->AddComponent<SpriteRenderer>();
+		// Animator*       ghost1Animator = ghost1->AddComponent<Animator>();
+
+		// Add ghost(monster) Script
+		Script* ghost1Script = ghost1->AddComponent<Script>();
+
+		if (BoxCollider2D* ghost1BoxCollider = ghost1->AddComponent<BoxCollider2D>())
+		{
+			ghost1BoxCollider->SetInitValue({-5.f, -5.f}, {25.f, 25.f});
+			ghost1BoxCollider->SetDebugColor(RGB(234, 12, 12));
+		}
+
+		if (backgroundRenderer && backgroundTexture)
+		{
+			backgroundRenderer->SetTexture(backgroundTexture);
+		}
+		if (pacmanRenderer && pacManTexture)
+		{
+			pacmanRenderer->SetTexture(pacManTexture);
+		}
+		if (ghost1Renderer && ghostTexture)
+		{
+			ghost1Renderer->SetTexture(ghostTexture);
+		}
 
 		Scene::Initialize();
 	}
@@ -100,19 +94,13 @@ namespace Cob
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
-
-		if (Input::GetKeyDown(EKeyCode::N))
-		{
-			SceneManager::LoadScene(L"TitleScene");
-		}
 	}
 
 	void PlayScene::Render(HDC Hdc)
 	{
 		Scene::Render(Hdc);
 
-		wchar_t str[50] = L"Play Scene";
-		TextOut(Hdc, 0, 0, str, 10);
+		TextOut(Hdc, 0, 0, L"PackMan", 7);
 	}
 
 	void PlayScene::OnEnter()

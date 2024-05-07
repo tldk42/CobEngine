@@ -4,7 +4,7 @@
 namespace Cob
 {
 	/**
-	 * \brief ÇÁ·Î±×·¥ ¾îÇÃ¸®ÄÉÀÌ¼Ç (»õ È­¸éÀ» ¸¸µé ¶§ ÀÌ Å¬·¡½º¸¦ ÀÌ¿ë)
+	 * \brief í”„ë¡œê·¸ë¨ ì–´í”Œë¦¬ì¼€ì´ì…˜ (ìƒˆ í™”ë©´ì„ ë§Œë“¤ ë•Œ ì´ í´ë˜ìŠ¤ë¥¼ ì´ìš©)
 	 */
 	class Application
 	{
@@ -21,6 +21,7 @@ namespace Cob
 		void Release();
 
 #pragma region Getter
+
 		FORCEINLINE HWND GetHwnd() const { return mHwnd; }
 		FORCEINLINE HDC  GetHdc() const { return mHdc; }
 		FORCEINLINE UINT GetWidth() const { return mWidth; }
@@ -28,19 +29,19 @@ namespace Cob
 #pragma endregion
 
 	private:
-		/** ¹é¹öÆÛ·Î È­¸éÀ» Clear */
+		/** ë°±ë²„í¼ë¡œ í™”ë©´ì„ Clear */
 		void ClearRenderTarget();
-		/** ¹é¹öÆÛÈ­¸éÀ» ÇÁ·ĞÆ®¹öÆÛ·Î º¹»ç */
+		/** ë°±ë²„í¼í™”ë©´ì„ í”„ë¡ íŠ¸ë²„í¼ë¡œ ë³µì‚¬ */
 		void CopyRenderTarget(HDC Source, HDC Dest);
-		/** À©µµ¿ìÃ¢ ³Êºñ ¼³Á¤ ¹× ÃÊ±âÈ­ */
+		/** ìœˆë„ìš°ì°½ ë„ˆë¹„ ì„¤ì • ë° ì´ˆê¸°í™” */
 		void AdjustWindowRect_Implement(HWND Hwnd, UINT Width, UINT Height);
-		/** ¹é¹öÆÛ »ı¼º */
+		/** ë°±ë²„í¼ ìƒì„± */
 		void CreateBuffer(UINT Width, UINT Height);
-		/** Ãß°¡ ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­ ÁøÇà */
+		/** ì¶”ê°€ ì»´í¬ë„ŒíŠ¸ ì´ˆê¸°í™” ì§„í–‰ */
 		void InitializeEtc();
 
 	private:
-		/** À©µµ¿ì ÇÚµé¤Ó */
+		/** ìœˆë„ìš° í•¸ë“¤ã…£ */
 		HWND mHwnd;
 
 		/** Device Context */

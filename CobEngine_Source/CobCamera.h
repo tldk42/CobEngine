@@ -16,7 +16,9 @@ namespace Cob
 		void LateUpdate() override;
 		void Render(HDC Hdc) override;
 
+		FORCEINLINE void SetTarget(Object* Target) { mViewTarget = Target; }
 		FORCEINLINE void SetViewTarget(Object* Target) { mViewTarget = Target; }
+
 
 		FORCEINLINE Vector2 CalculatePosition(const Vector2& Position) const
 		{

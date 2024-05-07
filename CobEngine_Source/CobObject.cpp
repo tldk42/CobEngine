@@ -4,6 +4,8 @@
 namespace Cob
 {
 	Object::Object()
+		: mState(EObjectState::Active),
+		  mLayerType(ELayerType::None)
 	{
 		mComponents.resize(static_cast<UINT>(EComponentType::End));
 		InitializeTransform();
@@ -63,6 +65,22 @@ namespace Cob
 				comp->Render(Hdc);
 			}
 		}
+	}
+
+	Transform* Object::GetTransform() const
+	{
+		Transform* transform = nullptr;
+
+		for (Component* comp : mComponents)
+		{
+			transform = static_cast<Transform*>(comp);
+			if (transform)
+			{
+				return transform;
+			}
+		}
+
+		return nullptr;
 	}
 
 	void Object::InitializeTransform()
